@@ -2,13 +2,26 @@
 import MainHead from '../components/MainHead.astro'
 
 export interface Props {
-    headTitle: string
+    mainHeadContent: MainHeadProps
 }
 
-const {headTitle} = Astro.props as Props
+interface MainHeadProps {
+  title: string;
+  description: string;
+  image?: string;
+  type?: string;
+  next?: string;
+  prev?: string;
+  canonicalURL?: string;
+  customCSS?: string;
+}
+
+const { mainHeadContent } = Astro.props as Props
 ---
 <html lang="en">
-    <MainHead headTitle={headTitle} />
+    <head>
+        <MainHead { ...mainHeadContent } />
+    </head>
     <body>
         <slot />
     </body>
