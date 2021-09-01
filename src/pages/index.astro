@@ -3,12 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import Quote from '../components/Quote/Quote.svelte'
 import { fetchQuotes } from "../api/quotes.js";
 
-const headTitle = 'Random quote generator - freeCodeCamp Project';
+const mainHeadContent = {
+	title: 'Random quote generator - freeCodeCamp Project'
+}
 
 const quotes = await fetchQuotes()
 ---
-
-<BaseLayout headTitle={headTitle}>
+<BaseLayout { mainHeadContent }>
 	<section class="bg-blue-50 text-gray-800 body-font h-screen">
 		<div class="container px-5 py-24 mx-auto">
 			<div id="quote-box" class="xl:w-1/2 lg:w-3/4 w-full mx-auto p-10 bg-white drop-shadow-xl rounded-md">
