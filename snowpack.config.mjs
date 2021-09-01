@@ -1,3 +1,3 @@
 export default {
-  plugins: ['@snowpack/plugin-postcss']
+  plugins: ['@snowpack/plugin-postcss'],
 };
