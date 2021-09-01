@@ -16,5 +16,5 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
     tailwindConfig: './tailwind.config.js',
   },
   // Set "renderers" to "[]" to disable all default, builtin component support.
-  renderers: ['@astrojs/renderer-svelte', '@astrojs/renderer-vue'],
+  renderers: ['@astrojs/renderer-svelte', '@astrojs/renderer-vue', '@astrojs/renderer-preact', '@astrojs/renderer-react'],
 });
