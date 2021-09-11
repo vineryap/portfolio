@@ -1,0 +1,30 @@
+---
+import NavbarLayout from "../layouts/NavbarLayout.astro";
+---
+
+<NavbarLayout>
+    <a href="/random-quote-machine" class="btn btn-ghost btn-sm rounded-btn">Random Quote Machine</a>
+    <div class="dropdown dropdown-hover">
+    <div tabindex="0" class="btn btn-ghost btn-sm rounded-btn">Markdown Previewer</div> 
+    <ul tabindex="0" class="p-2 text-black shadow menu dropdown-content bg-base-100 rounded-box w-52">
+        <li >
+            <a href="/markdown/astro">Astro</a>
+        </li> 
+        <li>
+            <a href="/markdown/react">React</a>
+        </li> 
+        <li>
+            <a href="/markdown/preact">Preact</a>
+        </li> 
+        <li>
+            <a href="/markdown/svelte">Svelte</a>
+        </li> 
+        <li>
+            <a href="/markdown/vue">Vue</a>
+        </li>
+    </ul>
+    </div>
+    <a href="/drum-machine" class="btn btn-ghost btn-sm rounded-btn">Drum Machine</a>
+    <a href="/javascript-calculator" class="btn btn-ghost btn-sm rounded-btn">JavaScript Calculator</a>
+    <a href="/25-plus-5-clock" class="btn btn-ghost btn-sm rounded-btn">25 + 5 Clock</a>
+</NavbarLayout>
