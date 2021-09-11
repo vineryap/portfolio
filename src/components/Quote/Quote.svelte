@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { cubicIn, cubicOut } from 'svelte/easing';
-
+  
   export let quotes;
   let theQuote;
   let theAuthor;
