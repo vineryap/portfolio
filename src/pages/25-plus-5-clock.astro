@@ -1,0 +1,18 @@
+---
+import FCCProjectsLayout from '$layouts/FCCProjectsLayout.astro'
+import Clock from '../components/25Plus5Clock/Clock.jsx'
+
+const MainHeadProps = {
+	title: '25 + 5 Clock - freeCodeCamp Project',
+    customCSS: ''
+}
+---
+
+<FCCProjectsLayout { MainHeadProps }>
+    <div class="min-w-screen min-h-screen bg-gray-100 flex flex-col items-center justify-center px-5 py-5">
+        <div className="flex flex-col items-center gap-24 px-28">
+            <Clock client:only="react" />
+        </div>
+        <audio id="beep" className="hidden invisible" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
+    </div>
+</FCCProjectsLayout>

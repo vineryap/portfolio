@@ -1,0 +1,23 @@
+---
+import FCCProjectsLayout from '$layouts/FCCProjectsLayout.astro'
+import Calculator from "../components/Calculator/Calculator.jsx";
+
+const MainHeadProps = {
+	title: 'JavaScript Calculator - freeCodeCamp Project',
+    customCSS: ''
+}
+---
+
+<FCCProjectsLayout { MainHeadProps }>
+<div
+  class="min-w-screen min-h-screen bg-gray-100 flex flex-col items-center justify-center px-5 py-5"
+>
+
+  <h1 class="text-3xl capitalize mb-10">Astro + React Calculator</h1>
+  
+  <div id="calculator" class="w-full md:max-w-[300px] rounded-xl bg-gray-100 shadow-2xl text-gray-50 relative overflow-hidden mx-auto">
+    <Calculator client:only="react"></Calculator>
+  </div>
+</div>
+
+</FCCProjectsLayout>
