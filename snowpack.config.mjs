@@ -8,10 +8,6 @@ export default {
     $styles: './src/styles',
     $utils: './src/utils',
   },
-  mount:{
-    src: '/src',
-    public: '/public'
-  },
   plugins: ['@snowpack/plugin-dotenv'],
   packageOptions: {
     rollup: {
