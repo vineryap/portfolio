@@ -13,8 +13,8 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
     sitemap: true, // Generate sitemap (set to "false" to disable)
   },
   devOptions: {
-    tailwindConfig: './tailwind.config.js',
+    // tailwindConfig: './tailwind.config.js',
   },
   // Set "renderers" to "[]" to disable all default, builtin component support.
-  renderers: ['@astrojs/renderer-svelte', '@astrojs/renderer-vue', '@astrojs/renderer-preact', '@astrojs/renderer-react'],
+  renderers: ['@astrojs/renderer-svelte', '@astrojs/renderer-vue', '@astrojs/renderer-preact', '@astrojs/renderer-react', '@astrojs/renderer-solid'],
 });

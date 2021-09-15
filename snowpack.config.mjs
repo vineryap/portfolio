@@ -1,18 +1,13 @@
+
 export default {
   alias: {
-    '~': './src',
-    $apis: './src/apis',
-    $components: './src/components',
-    $layouts: './src/layouts',
-    $stores: './src/stores',
-    $styles: './src/styles',
-    $utils: './src/utils',
+    "~": "./src",
   },
-  plugins: ['@snowpack/plugin-dotenv'],
+  plugins: ["@snowpack/plugin-dotenv", "@snowpack/plugin-postcss"],
   packageOptions: {
+    source: "local",
     rollup: {
-      plugins: [
-      ],
+      plugins: [],
     },
   },
 };
