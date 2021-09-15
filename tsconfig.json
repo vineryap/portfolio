@@ -1,36 +1,17 @@
 {
     "moduleResolution": "node",
     "compilerOptions": {
-        "module": "es2020",
-        "target": "esnext",
-        // "checkJs": true,
-        "allowJs": true,
-        // "isolatedModules": false,
+        "jsx": "preserve",
         "baseUrl": "src",
+        "outDir": "./dist",
         "paths": {
-            "$apis/*": [
-                "src/apis/*"
-            ],
-            "$components/*": [
-                "src/components/*"
-            ],
-            "$layouts/*": [
-                "src/layouts/*"
-            ],
-            "$stores/*": [
-                "src/stores/*"
-            ],
-            "$styles/*": [
-                "src/styles/*"
-            ],
-            "$utils/*": [
-                "src/utils/*"
-            ],
-        },
-        "outDir": "dist",
+            "~/*":[
+                "*"
+            ]
+        }
     },
     "include": [
-        "src/**/*"
+        "src"
     ],
     "exclude": [
         "node_modules",
