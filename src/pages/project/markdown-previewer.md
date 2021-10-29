@@ -23,7 +23,7 @@ technologies:
     - Solid JS
     - Tailwind CSS
 
-github_url:
+github_url: https://github.com/vineryap/portfolio/tree/master/src/components/Projects/Markdown
 published_date: 
 updated_date: 
 ---
