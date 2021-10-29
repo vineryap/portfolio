@@ -1,0 +1,17 @@
+---
+import ProjectLayout from '../ProjectLayout.astro';
+import RandomQuote from '../../components/Projects/RandomQuote/RandomQuote.svelte';
+
+const { content } = Astro.props;
+---
+
+<ProjectLayout projectTitle={content.title}>
+	<script type="text/javascript">
+	window.addEventListener("load", () => {
+		return document.querySelector('#quote-section').scrollIntoView({ behavior: "smooth", block: "center" });
+	})
+	</script>
+	<section id="quote-section" class="body-font flex w-full h-full justify-center my-20 lg:px-0">
+			<RandomQuote client:visible="svelte" />
+	</section>
+</ProjectLayout>

@@ -1,6 +1,61 @@
 ---
-import BaseLayout from '$layouts/BaseLayout.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import SectionHeader from '../components/SectionHeader.astro'
+import SectionAbout from '../components/SectionAbout.astro'
+import SectionProjects from '../components/SectionProjects.astro'
+import SectionSkills from '../components/SectionSkills.astro'
+
+interface SectionsProps {
+  header: object,
+  about: object,
+  projects: object,
+  skills: object,
+}
+
+let sectionsContent: SectionsProps = {
+  header: {},
+  about: {},
+  projects: {},
+  skills: {},
+};
+
+Astro.fetchContent('./sections/*.md').forEach(content => {
+  content.url = "#" + content.section;
+  sectionsContent[content.section] = content;
+})
+
+const { header, about, projects, skills } = sectionsContent;
+
+const navLinks = [
+    {
+      uri: "#header",
+      name: "Header"
+    },
+    {
+      uri: "#about",
+      name: "About"
+    },
+    {
+      uri: "#projects",
+      name: "Projects"
+    },
+    {
+      uri: "#skills",
+      name: "Skills"
+    }
+  ]
 ---
 <BaseLayout>
- landing page
+  <Navbar {navLinks} />
+  <main class="relative min-h-screen">
+    <div class="px-10 md:px-15 lg:px-0 overflow-hidden">
+    { header && <SectionHeader headerContent={ header } /> }
+    { about && <SectionAbout aboutContent={ about } /> }
+    { projects && <SectionProjects projectsContent={ projects } /> }
+    { skills && <SectionSkills skillsContent={ skills } /> }
+    </div>
+    <Footer/>
+  </main>
 </BaseLayout>

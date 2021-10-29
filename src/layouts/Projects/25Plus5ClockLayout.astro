@@ -1,0 +1,36 @@
+---
+import { Markdown } from 'astro/components';
+import ProjectLayout from '../ProjectLayout.astro';
+import Clock from '../../components/Projects/25Plus5Clock/Clock.jsx';
+
+const { content } = Astro.props;
+---
+<ProjectLayout projectTitle={content.title}>
+    <style>
+    #md-content h1 {
+        @apply mb-2 text-3xl font-black tracking-tighter text-black lg:text-5xl md:text-4xl;
+    }
+    #md-content h2 {
+        @apply mt-4 mb-4 text-3xl font-bold text-black;
+    }
+    #md-content p {
+        @apply pb-6;
+    }
+    #md-content a {
+        @apply text-accent underline;
+    }
+    </style>
+
+    <div class="h-full my-20">
+        <div class="h-full px-5 mx-auto">
+            <Clock client:visible="react" />
+            <audio id="beep" class="hidden invisible" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
+
+            <div class="flex flex-col lg:flex-row w-full">
+                <div id="md-content" class="w-full mx-auto mt-12 text-lg leading-snug tracking-tight lg:px-0">
+                    { content.astro.source && <Markdown content={content.astro.source} /> }
+                </div>
+            </div>
+        </div>
+    </div>
+</ProjectLayout>

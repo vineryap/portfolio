@@ -1,0 +1,82 @@
+---
+import Project from './Project.astro';
+
+
+const { projectsContent } = Astro.props;
+const {section, heading} = projectsContent;
+
+// collection
+interface MarkdownFrontmatter {
+    layout:string;
+    title: string;
+    description: string;
+    category: string | Array<string>;
+    tags: Array<string>;
+    technologies:  Array<string>;
+    github_url: string;
+    published_date: number;
+    updated_date: number;
+}
+
+const allProjects = Astro.fetchContent<MarkdownFrontmatter>('../pages/project/**/*.md')
+
+let paginatedProjects = []
+const projectSize = 4
+
+let tempArr = []
+
+allProjects.forEach((el, i) => {
+    const storeEl = () => {
+        paginatedProjects.push(tempArr)
+        tempArr = []
+    }
+    
+    if (tempArr.length === projectSize) {        
+        storeEl()
+    }
+    tempArr.push(el)
+    if (allProjects.length === (i + 1)) {
+        storeEl()
+    }
+})
+
+---
+<script>
+function handleClick() {
+    document.querySelectorAll("div[data-project-key]").forEach(el => {
+        if (el.dataset.projectKey > 0) {
+            el.classList.toggle('max-h-0')
+            el.classList.toggle('opacity-0')
+            el.classList.toggle('opacity-100')
+            el.classList.toggle('max-h-[1200px]')
+            el.classList.toggle('md:max-h-[800px]')
+            return;
+        }
+    });
+}
+</script>
+
+<section id={section} class="max-w-4xl mx-auto py-20 md:py-40 text-gray-600 body-font overflow-hidden">
+    <div class="container mx-auto">
+        <h1 class="mb-4 text-2xl font-bold text-left text-black title-font">
+            {heading}
+        </h1>
+        <div class="h-1 w-20 mb-10 bg-secondary"></div>
+        <div class="space-y-4">
+        {
+            paginatedProjects.map((page, i) => (
+            <div data-project-key={i} class={`${i > 0 && "max-h-0 opacity-0"} transition-all duration-300 ease-in-out h-full overflow-hidden grid md:grid-cols-2 gap-4`}>
+                {page.map(project => (
+                    <Project project={project} />
+                ))}
+            </div>
+        ))}
+        {
+            paginatedProjects.length > 1 &&
+            <div class="absolute inset-x-0 text-accent text-center text-base font-medium tracking-wider">
+                <a onclick="handleClick()" class="cursor-pointer">Show more</a>
+            </div>
+        }
+        </div>
+    </div>
+</section>

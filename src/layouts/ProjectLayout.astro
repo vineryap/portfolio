@@ -1,0 +1,32 @@
+---
+import MainHead from '../components/MainHead.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import FccToggle from '../components/fCCTestSuitToggle.svelte'
+
+const navLinks = [
+    {
+      uri: "/",
+      name: "Home"
+    }
+  ]
+
+const { projectTitle, fccTestSuite = true } = Astro.props;
+
+---
+<!DOCTYPE html>
+<html>
+    <head>
+        <MainHead />
+    </head>
+    <body>
+      <main class="relative min-h-screen w-full">
+        <div class="flex flex-col items-center pb-20 ">
+          <Navbar {navLinks} {projectTitle} />
+          <slot />
+          { fccTestSuite && <FccToggle client:media={"(min-width: 1024px)"} /> }
+        </div>
+        <Footer />
+      </main>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+---
+import { Markdown } from 'astro/components';
+
+const { aboutContent } = Astro.props;
+
+---
+
+<section id={aboutContent.section} class="max-w-4xl pb-20 md:pb-40 mx-auto">
+    <div class="container flex flex-col items-start mx-auto lg:items-center md:flex-row">
+        <div class="mb-10 md:mb-0 md:mt-6 lg:mt-0 bg-base-200 lg:max-w-lg md:w-1/2">
+            <img src={aboutContent.image} alt="Vin E. R. Yap picture" class="-mt-5 ml-5 mb-5 filter saturate-[80%] contrast-[90%] shadow-lg">
+        </div>
+        <div class="w-full flex flex-col items-start text-left lg:flex-grow md:w-1/2 lg:w-5/6 lg:pl-24 md:pl-16">
+            <h1 class="mb-4 text-2xl font-bold  text-left text-black title-font">
+                { aboutContent.heading }
+            </h1>
+            <div class="h-1 w-20 mb-10 bg-secondary"></div>
+            <p class="mb-8 text-base leading-relaxed text-left ">
+                { aboutContent.astro.source }
+            </p>
+
+            <p class="mb-4 text-black"> Techonologies that I'm using nowadays: </p>
+            <div class="grid grid-rows-4 grid-flow-col gap-4">
+            {aboutContent.list.map(item => (
+                <p class="flex mb-2 "><span class="inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full">
+                    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                    </svg>
+                    </span>{item}
+                </p>
+            ))}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import ProjectLayout from '../ProjectLayout.astro';
+import { toSlug } from "../../utils/index";
+import Icon from '../../components/Icon.astro';
+import iconsJson from '../../data/icons.json';
+
+const { content } = Astro.props;
+const { pathname } = Astro.request.url;
+
+const renderers = content.renderers.map(renderer => {
+    const name = renderer
+    const url = `${pathname}/${toSlug(renderer)}`
+    const icon = iconsJson[renderer].URI
+    let bgColor;
+    if (name.toLowerCase() === "vue.js") {
+        bgColor = "bg-[#42b883]"
+    }
+    if (name.toLowerCase() === "svelte") {
+        bgColor = "bg-[#ff3e00]"
+    }
+    if (name.toLowerCase() === "react") {
+        bgColor = "bg-[#61DBFB]"
+    }
+    if (name.toLowerCase() === "preact") {
+        bgColor = "bg-[#673AB8]"
+    }
+    if (name.toLowerCase() === "solid js") {
+        bgColor = "bg-[#2c4f7c]"
+    }
+    return {name, url, icon, bgColor}
+    })
+---
+<ProjectLayout projectTitle={content.title} fccTestSuite={false}>
+    <div class="flex flex-wrap w-full h-full max-w-3xl px-5 my-32 lg:px-0 items-center">
+        <p class="max-w-3xl text-lg font-medium leading-relaxed text-left mb-10">The app were built using {content.renderers.length} different frameworks:</p>
+        <div class="grid md:grid-cols-2 gap-4 w-full">
+            {
+                renderers.map(renderer =>
+                    <a class={`inline-flex justify-center items-center hover:bg-base-300 hover:border-base-300 border border-base-200 text-center text-lg font-medium p-5 rounded shadow transition-all`} href={renderer.url} target="_blank">
+                    <Icon uri={renderer.icon} className="transition-all h-8 w-8 mr-2" />{renderer.name} Markdown Previewer</a>
+                )
+            }
+        </div>
+    </div>
+</ProjectLayout>

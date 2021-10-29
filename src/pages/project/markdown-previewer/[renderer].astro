@@ -1,0 +1,71 @@
+---
+import Layout from '../../../layouts/ProjectLayout.astro';
+import Icon from '../../../components/Icon.astro'
+import ReactMdPreviewer from '../../../components/Projects/Markdown/MdPreviewerReact.jsx';
+import SvelteMdPreviewer from '../../../components/Projects/Markdown/MdPreviewer.svelte';
+import VueMdPreviewer from '../../../components/Projects/Markdown/MdPreviewer.vue';
+import PreactMdPreviewer from '../../../components/Projects/Markdown/MdPreviewerPreact.jsx';
+import SolidMdPreviewer from '../../../components/Projects/Markdown/MdPreviewerSolid.jsx';
+import '../../../styles/markdown.css';
+import 'prismjs/themes/prism.css';
+
+export async function getStaticPaths() {
+  return [
+    { params: { renderer: 'react' } },
+    { params: { renderer: 'svelte' } },
+    { params: { renderer: 'vue-js' } },
+    { params: { renderer: 'preact' } },
+    { params: { renderer: 'solid-js' } }
+  ];
+}
+const { renderer } = Astro.request.params;
+
+let title = null;
+
+switch (renderer) {
+  case 'react':
+    title = "React Markdown Previewer"
+    break;
+  case 'svelte':
+    title = "Svelte Markdown Previewer"
+    break;
+  case 'vue-js':
+    title = "Vue.js Markdown Previewer"
+    break;
+  case 'preact':
+    title = "Preact Markdown Previewer"
+    break;
+  case 'solid-js':
+    title = "Solid JS Markdown Previewer"
+    break;
+  default:
+    title = null;
+    break;
+}
+---
+
+<Layout projectTitle={title}>
+  <div id="mdpreviewer" class="w-full h-full mt-20 md:mt-0 overflow-hidden">
+    { renderer === 'react' && <ReactMdPreviewer client:only="react" /> }
+    { renderer === 'svelte' && <SvelteMdPreviewer client:only="svelte" /> }
+    { renderer === 'vue-js' && <VueMdPreviewer client:only="vue" /> }
+    { renderer === 'preact' && <PreactMdPreviewer client:only="preact" /> }
+    { renderer === 'solid-js' && <SolidMdPreviewer client:only="solid" /> }
+  </div>
+
+  <div class="container block px-5 md:px-16 lg:px-0 mb-20 mt-10 md:mb-10 md:mt-0 text-sm">
+    <a href="https://www.markdownguide.org/" rel="external" target="_blank" class="link text-primary-focus">What is markdown?</a>
+    <ul class="md:flex items-center md:space-x-4 mt-4 md:mt-2">
+      <p class="font-medium">Learn Markdown:</p>
+      <li>
+       <a class="link text-primary-focus inline-flex items-center" href="https://www.markdownguide.org/getting-started/" rel="external noreferrer" target="_blank">Markdown Guide <Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/></a>
+      </li>
+      <li>
+       <a class="link text-primary-focus inline-flex items-center" href="https://guides.github.com/features/mastering-markdown/" rel="external noreferrer" target="_blank">Mastering Markdown <Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/></a>
+      </li>
+      <li>
+       <a class="link text-primary-focus inline-flex items-center" href="https://www.markdowntutorial.com/" rel="external noreferrer" target="_blank">Markdown Tutorial <Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/></a>
+      </li>
+    </ul>
+  </div>
+</Layout>

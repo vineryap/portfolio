@@ -1,23 +1,5 @@
 ---
-interface Script {
-  src: string;
-  type?: string;
-  defer?: boolean;
-}
-export interface Props {
-  title: string;
-  description: string;
-  image?: string;
-  type?: string;
-  next?: string;
-  prev?: string;
-  canonicalURL?: string;
-  customCSS?: string | Array<string>;
-  externalCSS?: string | Array<string>;
-  customScript?: Script | Array<Script>;
-  externalScript?: Script | Array<Script>;
-}
-const { title, description, image, next, prev, canonicalURL, customCSS, externalCSS, customScript, externalScript } = Astro.props as Props;
+const { title, description, image, next, prev, canonicalURL, customCSS, externalCSS, customScript, externalScript } = Astro.props;
 
 const globalCSS = Astro.resolve('../styles/global.css');
 
@@ -31,29 +13,33 @@ const defer = true;
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content={description}>
-<!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
-<!-- <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> -->
 <link rel="stylesheet" type="text/css" href={globalCSS}>
 {
   (Array.isArray(customCSS) && customCSS.length) ? 
     customCSS.map((css) => <link rel="stylesheet" type="text/css" href={Astro.resolve(css)}/>)
-   : customCSS && <link rel="stylesheet" type="text/css" href={Astro.resolve(customCSS)}/>
+   :
+    customCSS && <link rel="stylesheet" type="text/css" href={Astro.resolve(customCSS)}/>
 }
 {
   (Array.isArray(externalCSS) && externalCSS.length) ? 
     externalCSS.map((css) => <link rel="stylesheet" type="text/css" href={css}/>)
-   : externalCSS && <link rel="stylesheet" type="text/css" href={externalCSS}/>
+   :
+    externalCSS && <link rel="stylesheet" type="text/css" href={externalCSS}/>
 }
+
 {
   (Array.isArray(customScript) && customScript.length) ? 
     customScript.map((script) => <script type={script.type ?? scriptDefaultType} src={Astro.resolve(script.src)} defer={script.defer ?? defer}></script>)
-   : customScript && <script type={customScript.type ? customScript.type : scriptDefaultType} src={Astro.resolve(customScript.src)} defer={customScript.defer ?? defer}></script>
+   :
+    customScript && <script type={customScript.type ? customScript.type : scriptDefaultType} src={Astro.resolve(customScript.src)} defer={customScript.defer ?? defer}></script>
 }
 {
   (Array.isArray(externalScript) && externalScript.length) ? 
     externalScript.map((script) => <script type={script.type ?? scriptDefaultType} src={script.src} defer={script.defer ?? defer}></script>)
-   : externalScript && <script type={externalScript.type ? externalScript.type : scriptDefaultType} src={externalScript.src} defer={externalScript.defer ?? defer}></script>
+   :
+    externalScript && <script type={externalScript.type ? externalScript.type : scriptDefaultType} src={externalScript.src} defer={externalScript.defer ?? defer}></script>
 }
+
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap.xml">
 <!-- RSS -->
@@ -68,6 +54,10 @@ const defer = true;
 {prev && <link rel="prev" aria-label="Next Page" href={new URL(prev, canonicalURL).href}>}
 
 <!-- OpenGraph -->
+<meta property="og:locale" content="en_GB" />
+<meta property="og:locale:alternate" content="fr_FR" />
+<meta property="og:locale:alternate" content="es_ES" />
+<meta property="og:site_name" content="IMDb" />
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
 {image && (<meta property="og:image" content={new URL(image, canonicalURL)}>)}
@@ -79,5 +69,4 @@ const defer = true;
 <meta name="twitter:description" content={description}>
 {image && (<meta name="twitter:image" content={image}>)}
 
-<!-- freeCodeCamp Test Script -->
-<script defer src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" />
+<slot />

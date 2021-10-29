@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import iconsJson from '../data/icons.json';
+
+export interface Props {
+  project: object;
+}
+
+const { project } = Astro.props;
+
+---
+
+<article class="w-full transition-all">
+  <div class="h-full transition-all border border-secondary border-opacity-60 hover:shadow-inner overflow-hidden">
+    <div class="flex flex-col h-full justify-between p-6">
+      <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1">{project.category}</h2>
+      <h1 class="text-lg h-full font-medium text-gray-900 mb-3">{project.title}</h1>
+      <p class="leading-relaxed mb-3 h-full">{project.description}</p>
+      <div class="divide-y-2 divide-gray-100 space-y-4 mt-8">
+        <div class="grid grid-cols-6 lg:grid-cols-8 gap-2 gap-y-4 justify-items-center">
+        {
+            project.technologies.map((tech) => (
+                <Icon uri={iconsJson[tech].URI} iconName={tech} tooltip={true} className="h-7 w-7 transition-filter filter grayscale hover:filter-none" />
+            ))
+        }
+        </div>
+
+        <div class="flex flex-wrap items-center pt-4">
+        {
+          project.github_url && 
+          <span class="text-gray-400 inline-flex items-center md:mb-2 lg:mb-0 leading-none text-sm py-1">
+            <a href="https://github.com/vineryap" target="_blank" rel="external" class="text-neutral inline-flex items-center">
+                <span class="hidden">Link to open {project.title} project source code on github, on a new tab.</span>
+                <Icon uri={"logos:github-icon"} className="transition-all h-6 w-6 opacity-60 hover:opacity-100" />
+            </a>
+          </span>
+        }
+
+          <a href={project.external_url ?? project.url} rel={project.external_url && "external noreferrer"} target="_blank" class="text-secondary inline-flex items-center lg:ml-auto md:ml-0 ml-auto">Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

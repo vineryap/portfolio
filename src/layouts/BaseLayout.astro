@@ -1,45 +1,16 @@
 ---
 import MainHead from '../components/MainHead.astro'
-import Navbar from '../components/Navbar.astro'
 
-interface Script {
-  src: string;
-  type?: string;
-  defer?: boolean;
-}
-
-export interface Props {
-  MainHeadProps: {
-    title: string;
-    description: string;
-    image?: string;
-    type?: string;
-    next?: string;
-    prev?: string;
-    canonicalURL?: string;
-    customCSS?: string | Array<string>;
-    externalCSS?: string | Array<string>;
-    customScript?: Script | Array<Script>;
-    externalScript?: Script | Array<Script>;
-    };
-  lang?: string;
-  theme?: string;
-}
-
-const { MainHeadProps,
-    lang = 'en',
-    theme = 'corporate' } = Astro.props as Props;
+const { MainHeadProps, lang = 'en' } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html data-theme={theme} lang={lang}>
+<html lang={lang}>
     <head>
         <MainHead { ...MainHeadProps } />
+        <script type="module" src={Astro.resolve('../scripts/scroll-handler.js')}></script>
     </head>
     <body>
-        <slot name="navbar-links">
-            <Navbar />
-        </slot>
         <slot />
     </body>
 </html>

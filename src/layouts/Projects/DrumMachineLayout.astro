@@ -1,0 +1,13 @@
+---
+import ProjectLayout from '../ProjectLayout.astro';
+import DrumMachine from "../../components/Projects/DrumMachine/DrumMachine.svelte";
+
+const { content } = Astro.props;
+---
+<ProjectLayout projectTitle={content.title}>
+  <div id="drum-machine" class="flex w-full h-full justify-center px-5 my-20 lg:px-0">
+      <div class="container max-w-3xl">
+        <DrumMachine client:visible="svelte" />
+      </div>
+  </div>
+</ProjectLayout>
