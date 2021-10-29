@@ -1,0 +1,18 @@
+---
+import { asDate } from "@prismicio/helpers";
+
+const {
+    date,
+    locales = "en-US",
+    options = {
+        year: "numeric",
+        month: "short",
+        day: "2-digit"
+    }
+} = Astro.props;
+
+const date = asDate(date);
+const formattedDate = new Intl.DateTimeFormat(locales, { options }).format(date);
+---
+
+{formattedDate}

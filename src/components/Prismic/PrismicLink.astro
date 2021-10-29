@@ -1,0 +1,16 @@
+---
+import { asLink } from "@prismicio/helpers";
+
+const { type, uid, link } = Astro.props;
+
+const linkResolver = (type) => {
+  // Pretty URLs for known types
+  if (type === 'project') return "/project/" + uid;
+  else if (type === 'page') return "/" + uid;
+  // Fallback for other types, in case new custom types get created
+  else return "#" ;
+};
+
+const linkUrl = asLink(link, linkResolver);
+---
+{linkUrl}

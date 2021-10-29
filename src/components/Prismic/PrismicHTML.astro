@@ -1,0 +1,8 @@
+---
+import { asHTML } from "@prismicio/helpers";
+
+const { htmlContent } = Astro.props;
+
+const html = asHtml(htmlContent);
+---
+{html}
