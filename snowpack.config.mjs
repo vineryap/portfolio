@@ -1,13 +1,15 @@
-
 export default {
-  alias: {
-    "~": "./src",
-  },
-  plugins: ["@snowpack/plugin-dotenv", "@snowpack/plugin-postcss"],
+  alias: {},
+  plugins: ['@snowpack/plugin-dotenv', '@snowpack/plugin-postcss'],
+  env: {},
   packageOptions: {
-    source: "local",
+    knownEntrypoints: ['svelte/easing', 'astro/debug'],
     rollup: {
-      plugins: [],
-    },
+      plugins: []
+    }
   },
+  buildOptions: {},
+  optimize: {
+    target: 'safari11'
+  }
 };

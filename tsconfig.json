@@ -1,20 +1,6 @@
 {
     "moduleResolution": "node",
     "compilerOptions": {
-        "jsx": "preserve",
-        "baseUrl": "src",
-        "outDir": "./dist",
-        "paths": {
-            "~/*":[
-                "*"
-            ]
-        }
-    },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
-    ],
+        "target": "es2015"
+    }
 }
