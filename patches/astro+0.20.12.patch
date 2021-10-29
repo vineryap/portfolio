@@ -1,0 +1,20 @@
+diff --git a/node_modules/astro/snowpack-plugin-jsx.cjs b/node_modules/astro/snowpack-plugin-jsx.cjs
+index da373e1..28a4456 100644
+--- a/node_modules/astro/snowpack-plugin-jsx.cjs
++++ b/node_modules/astro/snowpack-plugin-jsx.cjs
+@@ -53,6 +53,7 @@ module.exports = function jsxPlugin(config, options = {}) {
+ 
+       const { code, warnings } = await esbuild.transform(contents, {
+         loader,
++        target: 'safari11',
+         jsx: 'preserve',
+         sourcefile: filePath,
+         sourcemap: config.buildOptions.sourcemap ? 'inline' : undefined,
+@@ -97,6 +98,7 @@ Unable to resolve a renderer that handles JSX transforms! Please include a \`ren
+       // NOTE(fks, matthewp): Make sure that you're transforming the original contents here.
+       const { code: codeToScan } = await esbuild.transform(contents + PREVENT_UNUSED_IMPORTS, {
+         loader,
++        target: 'safari11',
+         jsx: 'transform',
+         jsxFactory: 'h',
+         jsxFragment: 'Fragment',
