@@ -13,11 +13,12 @@ const navLinks = [
 
 const { projectTitle, fccTestSuite = true } = Astro.props;
 
+const siteTitle = `${projectTitle} - Project | Vin Yap`
 ---
 <!DOCTYPE html>
 <html>
     <head>
-        <MainHead />
+        <MainHead title={siteTitle} />
     </head>
     <body>
       <main class="relative min-h-screen w-full">
