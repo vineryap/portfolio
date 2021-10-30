@@ -3,7 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import { fetchQuotes } from './quotes.js';
 
-	const { SNOWPACK_PUBLIC_UNSPLASH_API } = import.meta.env;
+	const { SNOWPACK_PUBLIC_UNSPLASH_API } = process.env;
 
 	let quotes,
 		theQuote,
