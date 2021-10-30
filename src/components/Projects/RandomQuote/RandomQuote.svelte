@@ -3,8 +3,6 @@
 	import { fade } from 'svelte/transition';
 	import { fetchQuotes } from './quotes.js';
 
-	const { SNOWPACK_PUBLIC_UNSPLASH_API } = process.env;
-
 	let quotes,
 		theQuote,
 		theAuthor,
@@ -23,7 +21,7 @@
 	}
 
 	async function fetchImage() {
-		let res = await fetch(`${SNOWPACK_PUBLIC_UNSPLASH_API}/1920x1080/?nature`).then((res) => res);
+		let res = await fetch(`${process.env.SNOWPACK_PUBLIC_FCC_QUOTE_API}/1920x1080/?nature`).then((res) => res);
 
 		if (res.url.includes('https://images.unsplash.com/source-404')) {
 			res = fetchImage();
