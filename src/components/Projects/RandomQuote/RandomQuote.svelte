@@ -21,7 +21,7 @@
 	}
 
 	async function fetchImage() {
-		let res = await fetch(`${import.meta.env.SNOWPACK_PUBLIC_FCC_QUOTE_API}/1920x1080/?nature`).then((res) => res);
+		let res = await fetch(`${import.meta.env.SNOWPACK_PUBLIC_UNSPLASH_API}/1920x1080/?nature`).then((res) => res);
 
 		if (res.url.includes('https://images.unsplash.com/source-404')) {
 			res = fetchImage();
