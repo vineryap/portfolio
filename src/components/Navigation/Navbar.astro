@@ -1,0 +1,63 @@
+---
+import MenuDrawer from './MenuDrawer.astro';
+import LanguageSelect from './LanguageSelect.vue';
+import { NAVIGATION } from "../../config";
+
+const { lang, projectTitle } = Astro.props;
+const links = NAVIGATION[lang];
+---
+
+<style>
+.nav-link::before {
+  @apply content-[''] transition-all h-1 w-1 p-1 mr-3 rounded-full;
+}
+@-moz-document url-prefix() {
+  .navbar-background {
+    @apply bg-opacity-95
+    }
+  }
+</style>
+
+<div class="fixed z-10 w-full items-center">
+  <div class={`navbar-background transition duration-500 ease-in-out transform bg-base-100 bg-opacity-0 backdrop-filter ${projectTitle ? 'bg-opacity-70 backdrop-blur shadow' : 'md:bg-opacity-70 md:backdrop-blur md:shadow'}`}>
+    <div class="container flex flex-wrap mx-auto justify-evenly px-5 py-2 md:items-center md:flex-row items-center">
+      <!-- <a href="/" class="flex justify-start items-center mr-auto">
+        <div class="inline-flex items-center">
+          <h2 class="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer lg:text-x"> Vin </h2>
+        </div>
+      </a> -->
+
+      {
+        !projectTitle && links &&
+        <nav class="hidden md:flex justify-center focus:outline-none items-center md:min-w-[10rem] lg:min-w-[20rem]">
+          <ul class="w-full justify-start items-center inline-block list-none md:inline-flex">
+            {
+              links.map(link => (
+                <li>
+                  <a href={link.path} class={`${lang === "ja" ? 'ja-font text-sm' : 'text-base'} nav-link px-2 py-1 mr-1 text-base-content hover:text-secondary-focus font-medium transition-all inline-flex items-center`}>
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      }
+
+      {
+        projectTitle &&
+        <div class="flex justify-start mr-auto md:mx-auto md:flex-auto">
+          <h2 class={`${lang === "ja" ? 'ja-font text-sm md:text-lg' : 'text-md md:text-xl'} block p-2 font-medium tracking-tighter text-base-content transition duration-500 ease-in-out transform break-words`}> {projectTitle} </h2>
+        </div>
+      }
+
+      <div class="flex flex-wrap items-center justify-end text-base ml-auto md:min-w-[10rem] lg:min-w-[20rem]">
+        <MenuDrawer lang={lang} links={links} {projectTitle} />
+        <div class="hidden md:inline-flex items-center list-none space-x-4">
+          <LanguageSelect lang={lang} client:only="vue"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

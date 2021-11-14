@@ -1,33 +1,50 @@
 ---
-import MainHead from '../components/MainHead.astro'
-import Navbar from '../components/Navbar.astro'
-import Footer from '../components/Footer.astro'
-import FccToggle from '../components/fCCTestSuitToggle.svelte'
+import MainHead from '../components/MainHead.astro';
+import Navbar from '../components/Navigation/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import FccToggle from '../components/Widgets/fCCTestSuitToggle.svelte';
 
-const navLinks = [
-    {
-      uri: "/",
-      name: "Home"
-    }
-  ]
+const { lang = 'en', projectInfo, fccTestSuite = true } = Astro.props;
 
-const { projectTitle, fccTestSuite = true } = Astro.props;
+const siteTitle = `${projectInfo.title} - Project | Vin Yap`;
 
-const siteTitle = `${projectTitle} - Project | Vin Yap`
+const MainHeadProps = {
+  siteTitle,
+  ...projectInfo,
+  lang
+}
+// const MainHeadProps = MainHeadProps ? MainHeadProps : {
+//   title: siteTitle,
+//   url: `${siteUrl}/projects/${projectSlug}`,
+//   image: `${siteUrl}/assets/images/projects/${projectSlug}/preview.png`,
+//   lang,
+//   ogType: 'website',
+//   ogTitle: siteTitle,
+//   ogDescription: `${projectTitle} - Project | Vin Yap`,
+//   ogUrl: `${siteUrl}/projects/${projectSlug}`,
+//   ogImage: `${siteUrl}/assets/images/projects/${projectSlug}/preview.png`,
+//   twitterTitle: siteTitle,
+//   twitterDescription: `${projectTitle} - Project | Vin Yap`,
+//   twitterUrl: `${siteUrl}/projects/${projectSlug}`,
+//   twitterImage: `${siteUrl}/assets/images/projects/${projectSlug}/preview.png`,
+//   twitterCard: 'summary_large_image',
+//   twitterCreator: '@vin_yap',
+//   twitterSite: '@vin_yap',
+// }
 ---
 <!DOCTYPE html>
-<html>
+<html lang={lang}>
     <head>
-        <MainHead title={siteTitle} />
+        <MainHead { ...MainHeadProps } />
     </head>
     <body>
       <main class="relative min-h-screen w-full">
         <div class="flex flex-col items-center pb-20 ">
-          <Navbar {navLinks} {projectTitle} />
+          <Navbar lang={lang} projectTitle={projectInfo.title} />
           <slot />
-          { fccTestSuite && <FccToggle client:media={"(min-width: 1024px)"} /> }
+          { fccTestSuite && <FccToggle client:only="svelte" /> }
         </div>
-        <Footer />
+        <Footer lang={lang}/>
       </main>
     </body>
 </html>

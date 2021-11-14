@@ -1,0 +1,59 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import ShowButton from './ProjectsButton.svelte'
+import { SOCIAL_MEDIA_LINKS } from '../../config/index';
+
+const { sectionTitle, allProjects, lang = "en" } = Astro.props;
+
+
+// Sort projects ascending by title
+const sortedProjects = allProjects.sort((a, b) => {
+    if (a.title < b.title) return -1;
+    if (a.title > b.title) return 1;
+    return 0;
+});
+
+// Paginate projects
+let paginatedProjects = [], tempArr = [];
+const projectSize = 4;
+
+sortedProjects.forEach((project, i) => {
+    // create source code url
+    if (project.github_url) project.github_url = SOCIAL_MEDIA_LINKS.github + '/portfolio/tree/master/src/components/Projects/' + project.github_url;
+
+    // paginate projects
+    const storeProject = () => {
+        paginatedProjects.push(tempArr)
+        tempArr = []
+    }
+    
+    if (tempArr.length === projectSize) {        
+        storeProject()
+    }
+    tempArr.push(project)
+    if (allProjects.length === (i + 1)) {
+        storeProject()
+    }
+});
+---
+<section id="projects" class="px-5 max-w-4xl mx-auto py-20 md:pt-20 md:pb-40 text-gray-600 body-font overflow-hidden">
+    <div class="container mx-auto">
+        <h1 class={`${lang === 'ja' ? 'ja-font' : ''} mb-4 text-2xl font-bold text-left text-black`}>
+            {sectionTitle}
+        </h1>
+        <div class="h-1 w-28 mb-10 bg-primary rounded"></div>
+        <div class="space-y-4">
+        {
+            paginatedProjects.map((page, i) => (
+            <div data-project-key={i} class={`${i > 0 ? "max-h-0 opacity-0" : ""} transition-all duration-300 ease-in-out h-full   overflow-hidden grid md:grid-cols-2 gap-4`}>
+                {page.map(project => (
+                    <ProjectCard lang={lang} project={project} />
+                ))}
+            </div>
+        ))}
+        </div>
+        <div class="w-full justify-center text-center text-base font-medium tracking-wider">
+            { paginatedProjects.length > 1 && <ShowButton lang={lang} client:visible="svelte" /> }
+        </div>
+    </div>
+</section>

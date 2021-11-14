@@ -1,0 +1,64 @@
+{
+  "Astro": {
+    "name": "Astro",
+    "URI": "vscode-icons:file-type-astro"
+  },
+  "Vue.js": {
+    "name": "Vue.js",
+    "URI": "vscode-icons:file-type-vue"
+  },
+  "Svelte": {
+    "name": "Svelte",
+    "URI": "vscode-icons:file-type-svelte"
+  },
+  "React": {
+    "name": "React",
+    "URI": "vscode-icons:file-type-reactjs"
+  },
+  "Preact": {
+    "name": "Preact",
+    "URI": "logos:preact"
+  },
+  "Solid JS": { "name": "Solid JS", "URI": "/assets/solidjs.svg" },
+  "Tailwind CSS": {
+    "name": "Tailwind CSS",
+    "URI": "vscode-icons:file-type-tailwind"
+  },
+  "Windi CSS": { "name": "Windi CSS", "URI": "/assets/windi.svg" },
+  "WordPress": {
+    "name": "WordPress",
+    "URI": "logos:wordpress-icon"
+  },
+  "MySQL": {
+    "name": "MySQL",
+    "URI": "logos:mysql"
+  },
+  "JavaScript": {
+    "name": "JavaScript",
+    "URI": "logos:javascript"
+  },
+  "PHP": {
+    "name": "PHP",
+    "URI": "logos:php"
+  },
+  "HTML": {
+    "name": "HTML",
+    "URI": "logos:html-5"
+  },
+  "CSS": {
+    "name": "CSS",
+    "URI": "logos:css-3"
+  },
+  "jQuery": {
+    "name": "jQuery",
+    "URI": "logos:jquery"
+  },
+  "Bootstrap": {
+    "name": "Bootstrap",
+    "URI": "logos:bootstrap"
+  },
+  "Prismic": {
+    "name": "Prismic",
+    "URI": "logos:prismic-icon"
+  }
+}

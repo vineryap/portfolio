@@ -1,0 +1,57 @@
+---
+import Icon from '../Icon.astro';
+import iconsJson from '../../config/icons.json';
+
+export interface Props {
+  lang: string;
+  project: object;
+}
+
+const { lang = "en", project } = Astro.props;
+const i18n = {
+  en: {
+    sourceCodeLinka11y: `Link to open ${project.title} project source code on github, on a new tab.`,
+    sourceCodeLink: "Source Code",
+    viewButtonText: `${ project.external_url ? 'View' : 'Open app' }`
+  },
+  ja: {
+    sourceCodeLinka11y: `${project.title}プロジェクトのソースコードのリンク。`,
+    sourceCodeLink: "ソースコード",
+    viewButtonText: `${ project.external_url ? '見る' : 'アプリを開く' }`
+  }
+}
+---
+
+<article class="w-full transition-all border-2 border-secondary border-opacity-30 hover:border-opacity-100 overflow-hidden rounded-lg">
+    <div class="flex flex-col h-full justify-between p-6">
+      <!-- <h2 class="tracking-widest text-xs font-medium text-neutral text-opacity-60 mb-1">{project.category}</h2> -->
+      <h1 class={`${lang === 'ja' ? 'ja-font text-base' : 'text-lg'} font-medium text-neutral mb-3`}>{project.title}</h1>
+      <p class={`${lang === 'ja' ? 'ja-font text-sm' : ''} leading-relaxed mb-3 h-full`}>{project.description}</p>
+      <div class="divide-y-2 divide-gray-100 space-y-4 mt-8">
+        <div class="grid grid-cols-6 lg:grid-cols-8 gap-2 gap-y-4 justify-items-center">
+        {
+            project.technologies.map((tech) => (
+                <Icon uri={iconsJson[tech].URI} iconName={tech} tooltip={true} className="h-7 w-7 transition-filter filter grayscale hover:filter-none" />
+            ))
+        }
+        </div>
+
+        <div class="flex flex-row justify-between items-center pt-4">
+        {
+          project.github_url && 
+          <span class="inline-flex items-center leading-none py-1">
+            <a href={project.github_url} target="_blank" rel="external" class={`${lang === 'ja' ? 'ja-font' : ''} btn btn-xs btn-outline btn-accent rounded`}>
+              <span class="hidden">{i18n[lang].sourceCodeLinka11y}</span>
+              <Icon uri={"logos:github-icon"} className="mr-2" />
+              {i18n[lang].sourceCodeLink}<Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/>
+            </a>
+          </span>
+        }
+
+          <a href={project.external_url ?? project.url} rel={project.external_url && "external noreferrer"} target="_blank" class={`${lang === 'ja' ? 'ja-font' : ''} btn btn-xs btn-outline btn-secondary rounded`}>
+          {i18n[lang].viewButtonText}
+          </a>
+        </div>
+      </div>
+    </div>
+</article>

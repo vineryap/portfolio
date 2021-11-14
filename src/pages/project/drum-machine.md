@@ -12,7 +12,7 @@ technologies:
     - Svelte
     - Tailwind CSS
 
-github_url: https://github.com/vineryap/portfolio/tree/master/src/components/Projects/DrumMachine
+github_url: DrumMachine
 published_date: 
 updated_date: 
 ---

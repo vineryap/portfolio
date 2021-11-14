@@ -16,25 +16,29 @@ function scroll(selectors) {
   document.querySelectorAll(selectors).forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
+
+      if (!e.target.hash) return window.scrollTo({ top: 0, behavior: 'smooth' });
+
       const el = document.querySelector(e.target.hash);
 
-      let top = el.offsetTop;
-
-      if (e.target.hash) {
-        if (selectors.includes('menu-drawer')) {
-          top =
-            e.target.hash === '#about'
-              ? document.querySelector(e.target.hash).offsetTop / 1.1
-              : document.querySelector(e.target.hash).offsetTop;
-        } else {
-          top =
-            e.target.hash === '#about'
-              ? document.querySelector(e.target.hash).offsetTop / 1.1
-              : document.querySelector(e.target.hash).offsetTop;
+      if (el) {
+        let top = el.offsetTop;
+        if (e.target.hash) {
+          if (selectors.includes('menu-drawer')) {
+            top =
+              e.target.hash === '#about'
+                ? document.querySelector(e.target.hash).offsetTop / 1.1
+                : document.querySelector(e.target.hash).offsetTop;
+          } else {
+            top =
+              e.target.hash === '#about'
+                ? document.querySelector(e.target.hash).offsetTop / 1.1
+                : document.querySelector(e.target.hash).offsetTop;
+          }
         }
-      }
 
-      window.scrollTo({ top, left: el.offsetLeft, behavior: 'smooth' });
+        window.scrollTo({ top, left: el.offsetLeft, behavior: 'smooth' });
+      }
     });
   });
 }
@@ -58,10 +62,10 @@ function highlightLink() {
     });
 
     links.forEach((link) => {
-      link.classList.remove('before:bg-secondary');
+      link.classList.remove('before:bg-primary');
 
       if (link.href.includes(current)) {
-        link.classList.add('before:bg-secondary');
+        link.classList.add('before:bg-primary');
       }
     });
   });

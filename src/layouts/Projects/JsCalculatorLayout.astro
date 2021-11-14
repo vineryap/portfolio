@@ -1,11 +1,29 @@
 ---
 import ProjectLayout from '../ProjectLayout.astro';
 import Calculator from "../../components/Projects/Calculator/Calculator.jsx";
+import { getLanguageFromURL } from '../../utils/languages';
 
+const { href, pathname } = Astro.request.url;
+const lang = pathname && getLanguageFromURL(pathname);
 const { content } = Astro.props;
----
 
-<ProjectLayout projectTitle={content.title}>
+const i18n = {
+    en: {
+        SEO: {
+            url: href,
+            title: content.title,
+            description: "Calculator app.",
+        }
+    },
+    ja: {
+        SEO: {
+            url: href,
+            title: content.title,
+        }
+    }
+}
+---
+<ProjectLayout lang={lang} projectInfo={i18n[lang].SEO}>
   <div class="flex w-full h-full justify-center px-5 my-32 lg:px-0">
     <div id="calculator" class="w-full max-w-[300px] rounded-xl shadow-2xl text-gray-50 overflow-hidden mx-auto">
       <Calculator client:visible="react"></Calculator>

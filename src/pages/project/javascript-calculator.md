@@ -12,7 +12,7 @@ technologies:
     - React
     - Tailwind CSS
 
-github_url: https://github.com/vineryap/portfolio/tree/master/src/components/Projects/Calculator
+github_url: Calculator
 published_date: 
 updated_date: 
 ---

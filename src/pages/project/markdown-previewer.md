@@ -8,7 +8,7 @@ renderers:
     # - Solid JS
 
 title: Markdown Previewer
-description: An app to preview markdown in real-time as user type. The app were built using several frameworks (Vue.js, Svelte, React, Preact, Solid JS) on top of Astro.
+description: An app to preview markdown in real-time as user type.
 category: Front End Development Libraries
 tags:
     - front-end project
@@ -23,7 +23,7 @@ technologies:
     - Solid JS
     - Tailwind CSS
 
-github_url: https://github.com/vineryap/portfolio/tree/master/src/components/Projects/Markdown
+github_url: MarkdownPreviewer
 published_date: 
 updated_date: 
 ---

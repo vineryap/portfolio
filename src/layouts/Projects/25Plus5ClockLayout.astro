@@ -2,10 +2,30 @@
 import { Markdown } from 'astro/components';
 import ProjectLayout from '../ProjectLayout.astro';
 import Clock from '../../components/Projects/25Plus5Clock/Clock.jsx';
+import { getLanguageFromURL } from '../../utils/languages';
 
+const { href, pathname } = Astro.request.url;
+const lang = pathname && getLanguageFromURL(pathname);
 const { content } = Astro.props;
+
+const i18n = {
+    en: {
+        SEO: {
+            url: href,
+            title: content.title,
+            description: "Pomodoro clock app.",
+        }
+    },
+    ja: {
+        SEO: {
+            url: href,
+            title: content.title,
+            description: "ポモドーロ・テクニック時計。",
+        }
+    }
+}
 ---
-<ProjectLayout projectTitle={content.title}>
+<ProjectLayout lang={lang} projectInfo={i18n[lang].SEO}>
     <style>
     #md-content h1 {
         @apply mb-2 text-3xl font-black tracking-tighter text-black lg:text-5xl md:text-4xl;

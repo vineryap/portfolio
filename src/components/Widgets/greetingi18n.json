@@ -1,0 +1,12 @@
+{
+  "en": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
+  },
+  "ja": {
+    "morning": "おはようございます。",
+    "afternoon": "こんにちは。",
+    "evening": "こんばんは。"
+  }
+}

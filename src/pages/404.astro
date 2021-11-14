@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = '404 - Not Found';
+---
+
+<BaseLayout MainHeadProps={ { title } }>
+  <div id="not-found" class="flex flex-col w-full h-screen bg-primary items-center justify-center">
+    <h1 class="text-7xl text-primary-content font-semibold capitalize drop-shadow-lg">Page Not Found</h1>
+    <a href="/" class="btn btn-neutral mt-20">Back to home</a>
+  </div>
+</BaseLayout>

@@ -1,0 +1,106 @@
+---
+import Layout from '../../../../layouts/ProjectLayout.astro';
+import Icon from '../../../../components/Icon.astro';
+import ReactMdPreviewer from '../../../../components/Projects/MarkdownPreviewer/MdPreviewerReact.jsx';
+import SvelteMdPreviewer from '../../../../components/Projects/MarkdownPreviewer/MdPreviewer.svelte';
+import VueMdPreviewer from '../../../../components/Projects/MarkdownPreviewer/MdPreviewer.vue';
+import PreactMdPreviewer from '../../../../components/Projects/MarkdownPreviewer/MdPreviewerPreact.jsx';
+import SolidMdPreviewer from '../../../../components/Projects/MarkdownPreviewer/MdPreviewerSolid.jsx';
+import '../../../../styles/markdown.css';
+import 'prismjs/themes/prism.css';
+import { dirname } from 'node:path';
+import { getLanguageFromURL } from '../../../../utils/languages';
+
+const { href, pathname } = Astro.request.url;
+const lang = pathname && getLanguageFromURL(pathname);
+
+export async function getStaticPaths() {
+  return [
+    { params: { renderer: 'react' } },
+    { params: { renderer: 'svelte' } },
+    { params: { renderer: 'vue-js' } },
+    { params: { renderer: 'preact' } },
+    { params: { renderer: 'solid-js' } }
+  ];
+}
+const { renderer } = Astro.request.params;
+
+let title = "";
+
+switch (renderer) {
+  case 'react':
+    title = "React Markdown プレビューア"
+    break;
+  case 'svelte':
+    title = "Svelte Markdown プレビューア"
+    break;
+  case 'vue-js':
+    title = "Vue.js Markdown プレビューア"
+    break;
+  case 'preact':
+    title = "Preact Markdown プレビューア"
+    break;
+  case 'solid-js':
+    title = "Solid JS Markdown プレビューア"
+    break;
+  default:
+    title = "";
+    break;
+};
+
+const links = [
+  {
+    label: 'Back',
+    path: dirname(Astro.request.url.pathname)
+  }
+];
+
+const breadcrumbs = [
+  {
+    label: 'ホーム',
+    path: '/ja/'
+  },
+  {
+    label: 'Markdown プレビューア',
+    path: '/ja/project/markdown-previewer'
+  },
+  {
+    label: title,
+    path: null
+  }
+];
+const projectInfo = {
+  title: title,
+  url: href,
+};
+---
+
+<Layout lang={lang} projectInfo={projectInfo}>
+  <div class="container block px-5 md:px-8 w-full lg:px-20 my-20 md:mb-30 text-sm">
+    <div class="text-sm breadcrumbs">
+      <ul>
+      {
+        breadcrumbs.map((crumb, index) => (
+            <li key={index}>
+              <a href={crumb.path ? crumb.path : '#'} class="ja-font text-xs text-neutral">{crumb.label}</a>
+            </li> 
+          ))
+      }
+      </ul>
+    </div>
+
+    { renderer === 'react' && <ReactMdPreviewer client:only="react"/> }
+    { renderer === 'svelte' && <SvelteMdPreviewer client:only="svelte"/> }
+    { renderer === 'vue-js' && <VueMdPreviewer client:only="vue"/> }
+    { renderer === 'preact' && <PreactMdPreviewer client:only="preact"/> }
+    { renderer === 'solid-js' && <SolidMdPreviewer client:only="solid"/> }
+
+    <a href="https://www.markdown.jp/what-is-markdown/" rel="external" target="_blank" class="link text-primary-focus inline-flex items-center">Markdown（マークダウン）とは?<Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/></a>
+    <ul class="md:flex items-center md:space-x-4 mt-4 md:mt-2">
+      <p class="font-medium">Markdown入門:</p>
+      <li>
+       <a class="link text-primary-focus inline-flex items-center" href="https://www.markdown.jp/syntax/" rel="external noreferrer" target="_blank">Markdown記法 <Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/></a>
+      </li>
+    </ul>
+  </div>
+</Layout>
