@@ -12,7 +12,7 @@ technologies:
     - React
     - Tailwind CSS
 
-github_url:
+github_url: 25Plus5Clock
 published_date: 
 updated_date: 
 ---

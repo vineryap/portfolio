@@ -1,10 +1,26 @@
 @tailwind base;
-
-@layer base {
-  body {
-    @apply break-words text-neutral font-sans antialiased bg-base-100;
-  }
-}
-
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+body {
+  @apply break-words text-neutral font-sans antialiased bg-base-100;
+}
+#skills-items-wrapper p {
+  @apply mb-4 text-xs font-semibold tracking-widest text-primary uppercase;
+}
+.skills-ja p {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+#skills-items-wrapper ul {
+  @apply mb-10 list-none;
+}
+#skills-items-wrapper li {
+  @apply mb-2 text-xs text-neutral font-semibold tracking-widest uppercase;
+}
+#skills-items-wrapper li:last-child {
+  @apply mb-0;
+}
+.ja-font {
+  font-family: 'Noto Sans JP', sans-serif;
+}

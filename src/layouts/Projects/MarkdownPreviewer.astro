@@ -2,10 +2,12 @@
 import ProjectLayout from '../ProjectLayout.astro';
 import { toSlug } from "../../utils/index";
 import Icon from '../../components/Icon.astro';
-import iconsJson from '../../data/icons.json';
+import iconsJson from '../../config/icons.json';
+import { getLanguageFromURL } from '../../utils/languages';
 
 const { content } = Astro.props;
-const { pathname } = Astro.request.url;
+const { href, pathname } = Astro.request.url;
+const lang = pathname && getLanguageFromURL(pathname);
 
 const renderers = content.renderers.map(renderer => {
     const name = renderer
@@ -29,15 +31,37 @@ const renderers = content.renderers.map(renderer => {
     }
     return {name, url, icon, bgColor}
     })
+
+const i18n = {
+    en: {
+        projectTitle: content.title,
+        description: `The app were built using ${content.renderers.length} different frameworks:`,
+        SEO: {
+            url: href,
+            title: content.title,
+            description: "Markdown previewer app.",
+        }
+    },
+    ja: {
+        projectTitle: "Markdown プレビューア",
+        description: `本アプリは${content.renderers.length}つのフレームワークで構築しました：`,
+        SEO: {
+            url: href,
+            title: "Markdown プレビューア",
+            description: "Markdown プレビューアのアプリ.",
+        }
+    }
+}
+
 ---
-<ProjectLayout projectTitle={content.title} fccTestSuite={false}>
-    <div class="flex flex-wrap w-full h-full max-w-3xl px-5 my-32 lg:px-0 items-center">
-        <p class="max-w-3xl text-lg font-medium leading-relaxed text-left mb-10">The app were built using {content.renderers.length} different frameworks:</p>
+<ProjectLayout lang={lang} projectInfo={i18n[lang].SEO} fccTestSuite={false}>
+    <div class="flex flex-wrap w-full h-full max-w-3xl px-5 mt-32 mb-60 lg:px-0 items-center">
+        <p class={`${lang === 'ja' ? 'ja-font' : ''} max-w-3xl text-lg font-medium leading-relaxed text-left mb-10`}>{i18n[lang].description}</p>
         <div class="grid md:grid-cols-2 gap-4 w-full">
             {
                 renderers.map(renderer =>
-                    <a class={`inline-flex justify-center items-center hover:bg-base-300 hover:border-base-300 border border-base-200 text-center text-lg font-medium p-5 rounded shadow transition-all`} href={renderer.url} target="_blank">
-                    <Icon uri={renderer.icon} className="transition-all h-8 w-8 mr-2" />{renderer.name} Markdown Previewer</a>
+                    <a class={`inline-flex justify-center items-center hover:bg-base-300 hover:border-base-300 border border-base-200 text-center text-lg font-medium p-5 rounded shadow transition-all group`} href={renderer.url} target="_blank">
+                    <Icon uri={renderer.icon} className={`${lang === 'ja' ? 'ja-font' : ''} transition-all h-8 w-8 mr-2 filter grayscale group-hover:filter-none`} />{`${renderer.name} ${i18n[lang].projectTitle}`}</a>
                 )
             }
         </div>

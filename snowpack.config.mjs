@@ -3,7 +3,7 @@ export default {
   plugins: ['@snowpack/plugin-dotenv', '@snowpack/plugin-postcss'],
   env: {},
   packageOptions: {
-    knownEntrypoints: ['svelte/easing', 'astro/debug'],
+    knownEntrypoints: ['vue/server-renderer', 'svelte/easing', 'astro/debug'],
     rollup: {
       plugins: []
     }

@@ -7,25 +7,23 @@ export interface Props {
     altText?: string;
     tooltip?: boolean;
     dataTip?: string;
-}
+};
 
-const { uri, iconName, className, dataIcon, altText, tooltip = false, dataTip } = Astro.props
+const { uri, iconName, className, dataIcon, altText, tooltip = false, dataTip } = Astro.props;
 
 let URL = `https://api.iconify.design/${uri}.svg`;
 
-const regex = [ "^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$", "^(?:\/|[a-z]+:\/\/)" ]
+const URL_RegEx = [ "^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$", "^(?:\/|[a-z]+:\/\/)" ]
 
-if (new RegExp(regex.join("|"), "gi").test(uri)) {
+if (new RegExp(URL_RegEx.join("|"), "gi").test(uri)) {
     URL = uri
-}
-
+};
 
 const name = iconName ?? "";
 
 const dataIconKey = dataIcon ? dataIcon : iconName ? iconName.toLowerCase().replace(/[^a-zA-Z0-9]/gm, '_') : "";
 
 const alt = altText ? altText : `${name} icon.`;
-
 ---
 
 {

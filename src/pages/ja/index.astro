@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navigation/Navbar.astro';
+import ProjectsSection from '../../components/Sections/Projects.astro';
+import Footer from '../../components/Footer.astro';
+import Greeting from '../../components/Widgets/Greeting.svelte';
+import { getLanguageFromURL } from '../../utils/languages';
+import { client } from "../../api/prismic.js";
+import PrismicHTML from '../../components/Prismic/PrismicHTML.astro';
+import PrismicText from '../../components/Prismic/PrismicText.astro';
+
+const res = await client.getSingle('homepage', { lang: 'ja-jp' });
+const data = await res.data
+const currentPage = Astro.request.url.pathname;
+const lang = currentPage && getLanguageFromURL(currentPage);
+
+const MainHeadProps = {
+    lang,
+    siteTitle: "Vin Yap Portfolio",
+    description: "個人のポートフォリオウェブサイト。"
+};
+
+// Projects Section
+const allProjects = Astro.fetchContent('./project/**/*.md');
+
+// Skills Section
+const skillsSectionContent = data.body.filter(slice => slice.slice_type === 'skills_section')[0];
+---
+<BaseLayout MainHeadProps={MainHeadProps} lang={lang}>
+    <Navbar lang={lang}/>
+    <main class="relative min-h-screen">
+        <div class="overflow-hidden pb-72">
+            <section id="header" class=" min-h-[500px] md:min-h-[650px] 2xl:min-h-[750px] flex justify-center items-center mx-auto bg-cover bg-no-repeat" style="background-image: url(/assets/smoothwave.svg);">
+                <div class="px-5 md:px-0 flex flex-col items-center">
+                    <div class="flex flex-col items-start mb-16 text-left lg:flex-grow md:mb-0">
+                        <h5 class="ja-font mb-4 text-xs xl:text-sm font-semibold tracking-widest text-neutral">
+                            <Greeting lang={lang} client:only="svelte"/>
+                            <PrismicText textContent={data.eyebrow}/>
+                        </h5>
+                        <ruby>
+                            <rb>
+                                <h1 id="heading" class="mb-4 text-5xl 2xl:text-7xl font-extrabold text-neutral capitalize filter drop-shadow">
+                                    <PrismicText textContent={data.name}/>
+                                </h1>
+                            </rb>
+                            <rt class="ja-font text-xs text-secondary-focus font-bold drop-shadow-sm"><PrismicText textContent={data.name_phonetic}/></rt>
+                        </ruby>
+                        <h3 id="subheading" class="ja-font w-full text-2xl 2xl:text-4xl text-right font-medium text-primary filter drop-shadow">
+                            <PrismicText textContent={data.subheading}/>
+                        </h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- projects section -->
+            <ProjectsSection sectionTitle={"プロジェクト"} allProjects={allProjects} lang={lang} />
+
+            <!-- skills section -->
+            <section id="{skillsSectionContent.slice_label}" class="max-w-4xl mx-auto py-20">
+                <div class="container flex flex-col items-center px-5 py-8 mx-auto">
+                    <div class="flex flex-col w-full mb-12 text-left ">
+                        <div class="w-full">
+                            <h2 class="mx-auto mb-4 text-2xl font-semibold leading-none text-neutral ja-font">
+                                <PrismicText textContent={skillsSectionContent.primary.title}/>
+                            </h2>
+                            <div class="h-1 w-28 mb-10 bg-primary rounded"></div>
+                            <div id="skills-items-wrapper" class="skills-ja flex flex-wrap justify-start flex-grow space-y-4 space-y-reverse md:space-y-0 ">
+                            {
+                                skillsSectionContent.items.map(item => (
+                                    <div class="w-1/2 md:w-1/3">
+                                        <PrismicHTML htmlContent={item.skills} />
+                                    </div>
+                                ))
+                            }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <Footer lang={lang}/>
+    </main>
+</BaseLayout>

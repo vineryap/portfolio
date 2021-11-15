@@ -12,7 +12,7 @@ technologies:
     - Svelte
     - Tailwind CSS
 
-github_url:
+github_url: RandomQuote
 published_date: 
 updated_date: 
 ---

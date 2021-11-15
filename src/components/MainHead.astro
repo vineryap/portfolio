@@ -1,72 +1,56 @@
 ---
-const { title, description, image, next, prev, canonicalURL, customCSS, externalCSS, customScript, externalScript } = Astro.props;
+const { siteTitle, title, description, image, lang, canonicalURL, SEO } = Astro.props;
 
 const globalCSS = Astro.resolve('../styles/global.css');
 
-const scriptDefaultType = 'text/javascript';
-const defer = true;
+const locale = {
+    en: "en_US",
+    ja: "ja_JP"
+}
 ---
 
 <!-- Common -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
 <meta name="description" content={description}>
-<link rel="stylesheet" type="text/css" href={globalCSS}>
-{
-  (Array.isArray(customCSS) && customCSS.length) ? 
-    customCSS.map((css) => <link rel="stylesheet" type="text/css" href={Astro.resolve(css)}/>)
-   :
-    customCSS && <link rel="stylesheet" type="text/css" href={Astro.resolve(customCSS)}/>
-}
-{
-  (Array.isArray(externalCSS) && externalCSS.length) ? 
-    externalCSS.map((css) => <link rel="stylesheet" type="text/css" href={css}/>)
-   :
-    externalCSS && <link rel="stylesheet" type="text/css" href={externalCSS}/>
-}
+<title>{siteTitle}</title>
 
-{
-  (Array.isArray(customScript) && customScript.length) ? 
-    customScript.map((script) => <script type={script.type ?? scriptDefaultType} src={Astro.resolve(script.src)} defer={script.defer ?? defer}></script>)
-   :
-    customScript && <script type={customScript.type ? customScript.type : scriptDefaultType} src={Astro.resolve(customScript.src)} defer={customScript.defer ?? defer}></script>
-}
-{
-  (Array.isArray(externalScript) && externalScript.length) ? 
-    externalScript.map((script) => <script type={script.type ?? scriptDefaultType} src={script.src} defer={script.defer ?? defer}></script>)
-   :
-    externalScript && <script type={externalScript.type ? externalScript.type : scriptDefaultType} src={externalScript.src} defer={externalScript.defer ?? defer}></script>
-}
+<link rel="stylesheet" type="text/css" href={globalCSS}>
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap.xml">
+
 <!-- RSS -->
-<link rel="alternate" type="application/rss+xml" href="/feed/posts.xml">
+<!-- <link rel="alternate" type="application/rss+xml" href="/feed/posts.xml"> -->
 
 <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 
 <!-- SEO -->
 <link rel="canonical" href={canonicalURL}>
-{next && <link rel="next" aria-label="Previous Page" href={new URL(next, canonicalURL).href}>}
-{prev && <link rel="prev" aria-label="Next Page" href={new URL(prev, canonicalURL).href}>}
 
 <!-- OpenGraph -->
-<meta property="og:locale" content="en_GB" />
-<meta property="og:locale:alternate" content="fr_FR" />
-<meta property="og:locale:alternate" content="es_ES" />
-<meta property="og:site_name" content="IMDb" />
+<meta property="og:locale" content={locale[lang]}/>
+<meta property="og:locale:alternate" content={lang}/>
+<meta property="og:site_name" content="Vin Yap Portfolio"/>
 <meta property="og:title" content={title}>
-<meta property="og:description" content={description}>
-{image && (<meta property="og:image" content={new URL(image, canonicalURL)}>)}
+{ description && <meta property="og:description" content={description}> }
+{ image && (<meta property="og:image" content={new URL(image, canonicalURL)}>) }
+{ image && (<meta property="og:image:width" content="1200">) }
+{ image && (<meta property="og:image:height" content="630">) }
+{ image && (<meta property="og:image:type" content="image/png">) }
+{ image && (<meta property="og:image:alt" content={title}>) }
+<meta property="og:type" content="website"/>
+<meta property="og:url" content={canonicalURL}/>
+
 
 <!-- Twitter -->
 <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'}>
-<meta name="twitter:site" content="@astro">
+<meta name="twitter:site" content="@vineryap">
 <meta name="twitter:title" content={title}>
 <meta name="twitter:description" content={description}>
-{image && (<meta name="twitter:image" content={image}>)}
+{ image && (<meta name="twitter:image" content={image}>) }
 
-<slot />
+<script type="module" src={Astro.resolve('../scripts/scroll-handler.js')}></script>
+<slot/>

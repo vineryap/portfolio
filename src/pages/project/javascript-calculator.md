@@ -12,7 +12,7 @@ technologies:
     - React
     - Tailwind CSS
 
-github_url:
+github_url: Calculator
 published_date: 
 updated_date: 
 ---

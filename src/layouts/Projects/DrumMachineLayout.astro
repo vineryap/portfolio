@@ -1,11 +1,30 @@
 ---
 import ProjectLayout from '../ProjectLayout.astro';
 import DrumMachine from "../../components/Projects/DrumMachine/DrumMachine.svelte";
+import { getLanguageFromURL } from '../../utils/languages';
 
+const { href, pathname } = Astro.request.url;
+const lang = pathname && getLanguageFromURL(pathname);
 const { content } = Astro.props;
+
+const i18n = {
+    en: {
+        SEO: {
+            url: href,
+            title: content.title,
+            description: "Drum machine app.",
+        }
+    },
+    ja: {
+        SEO: {
+            url: href,
+            title: content.title,
+        }
+    }
+}
 ---
-<ProjectLayout projectTitle={content.title}>
-  <div id="drum-machine" class="flex w-full h-full justify-center px-5 my-20 lg:px-0">
+<ProjectLayout lang={lang} projectInfo={i18n[lang].SEO}>
+  <div id="drum-machine" class="flex w-full h-full justify-center px-5 mt-20 mb-60 lg:px-0">
       <div class="container max-w-3xl">
         <DrumMachine client:visible="svelte" />
       </div>

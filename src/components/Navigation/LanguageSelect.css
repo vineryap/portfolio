@@ -1,0 +1,27 @@
+.language-select-wrapper {
+  @apply relative text-neutral;
+}
+
+.language-select-wrapper > svg {
+  @apply absolute top-3 left-2 pointer-events-none;
+}
+
+.language-select-wrapper .language-select:hover,
+.language-select-wrapper .language-select:focus {
+  @apply text-neutral border-neutral;
+}
+
+.language-select {
+  @apply flex-grow min-w-[8rem] box-border m-0 py-2 pl-10 pr-2 overflow-visible font-medium text-base bg-transparent border-neutral text-neutral border-solid border-[1px] rounded outline-[0] cursor-pointer transition-all duration-200 ease-out antialiased;
+}
+
+.language-select,
+.language-select option {
+  @apply appearance-none;
+}
+
+@media (min-width: 50em) {
+  .language-select {
+    @apply w-full;
+  }
+}
