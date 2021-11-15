@@ -1,7 +1,7 @@
 ---
 layout: ../../../layouts/Projects/DrumMachineLayout.astro
 title: Drum Machine
-description: An app mimicking DJ drum pad.
+description: DJドラムパッドを模倣したアプリ。
 category: Front End Development Libraries
 tags:
     - front-end project

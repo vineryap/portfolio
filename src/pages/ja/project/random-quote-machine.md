@@ -1,7 +1,7 @@
 ---
 layout: ../../../layouts/Projects/RandomQuoteMachineLayout.astro
 title: Random Quote Machine
-description: A random quote generator and random background utilizing minimal unsplash api. Using Svelte for the client-side component.
+description: Unsplash APIを利用したランダム名言（クォート）ジェネレーターとランダムバックグラウンド。 クライアント側コンポーネントはSvelteを使用。
 category: Front End Development Libraries
 tags:
     - front-end project

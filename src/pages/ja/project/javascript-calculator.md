@@ -1,7 +1,7 @@
 ---
 layout: ../../../layouts/Projects/JsCalculatorLayout.astro
 title: Javascript Calculator
-description: A simple calculator app built with React.
+description: Reactで構築されたシンプルな電卓アプリ。
 category: Front End Development Libraries
 tags:
     - front-end project
