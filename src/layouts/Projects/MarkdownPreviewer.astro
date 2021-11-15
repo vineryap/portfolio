@@ -6,7 +6,7 @@ import iconsJson from '../../config/icons.json';
 import { getLanguageFromURL } from '../../utils/languages';
 
 const { content } = Astro.props;
-const { href, pathname } = Astro.request.url;
+const { pathname } = Astro.request.url;
 const lang = pathname && getLanguageFromURL(pathname);
 
 const renderers = content.renderers.map(renderer => {
@@ -37,7 +37,6 @@ const i18n = {
         projectTitle: content.title,
         description: `The app were built using ${content.renderers.length} different frameworks:`,
         SEO: {
-            url: href,
             title: content.title,
             description: "Markdown previewer app.",
         }
@@ -46,7 +45,6 @@ const i18n = {
         projectTitle: "Markdown プレビューア",
         description: `本アプリは${content.renderers.length}つのフレームワークで構築しました：`,
         SEO: {
-            url: href,
             title: "Markdown プレビューア",
             description: "Markdown プレビューアのアプリ.",
         }
