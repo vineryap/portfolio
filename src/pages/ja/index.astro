@@ -15,7 +15,9 @@ const currentPage = Astro.request.url.pathname;
 const lang = currentPage && getLanguageFromURL(currentPage);
 
 const MainHeadProps = {
-    title: "ホーム"
+    lang,
+    siteTitle: "Vin Yap Portfolio",
+    description: "個人のポートフォリオウェブサイト。"
 };
 
 // Projects Section
