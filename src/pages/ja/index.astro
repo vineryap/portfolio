@@ -34,7 +34,7 @@ const skillsSectionContent = data.body.filter(slice => slice.slice_type === 'ski
                 <div class="px-5 md:px-0 flex flex-col items-center">
                     <div class="flex flex-col items-start mb-16 text-left lg:flex-grow md:mb-0">
                         <h5 class="ja-font mb-4 text-xs xl:text-sm font-semibold tracking-widest text-neutral">
-                            <Greeting lang={lang} client:only="svelte"/>
+                            <Greeting lang={lang} client:load="svelte"/>
                             <PrismicText textContent={data.eyebrow}/>
                         </h5>
                         <ruby>
