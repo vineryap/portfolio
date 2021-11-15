@@ -1,6 +1,6 @@
 ---
 title: Lokating.com
-description: 日本の外国籍の方のための不動産検索ポータル。
+description: 外国籍の方のための日本不動産検索ポータル。
 category: Full-stack
 tags:
     - full-stack project

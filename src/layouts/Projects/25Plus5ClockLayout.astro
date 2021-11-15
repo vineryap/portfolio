@@ -4,21 +4,19 @@ import ProjectLayout from '../ProjectLayout.astro';
 import Clock from '../../components/Projects/25Plus5Clock/Clock.jsx';
 import { getLanguageFromURL } from '../../utils/languages';
 
-const { href, pathname } = Astro.request.url;
+const { pathname } = Astro.request.url;
 const lang = pathname && getLanguageFromURL(pathname);
 const { content } = Astro.props;
 
 const i18n = {
     en: {
         SEO: {
-            url: href,
             title: content.title,
             description: "Pomodoro clock app.",
         }
     },
     ja: {
         SEO: {
-            url: href,
             title: content.title,
             description: "ポモドーロ・テクニック時計。",
         }

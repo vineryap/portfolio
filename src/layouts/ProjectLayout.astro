@@ -6,31 +6,13 @@ import FccToggle from '../components/Widgets/fCCTestSuitToggle.svelte';
 
 const { lang = 'en', projectInfo, fccTestSuite = true } = Astro.props;
 
-const siteTitle = `${projectInfo.title} - Project | Vin Yap`;
+const title = `${projectInfo.title} - Project | Vin Yap`;
 
 const MainHeadProps = {
-  siteTitle,
-  ...projectInfo,
+  title,
+  description: projectInfo.description,
   lang
-}
-// const MainHeadProps = MainHeadProps ? MainHeadProps : {
-//   title: siteTitle,
-//   url: `${siteUrl}/projects/${projectSlug}`,
-//   image: `${siteUrl}/assets/images/projects/${projectSlug}/preview.png`,
-//   lang,
-//   ogType: 'website',
-//   ogTitle: siteTitle,
-//   ogDescription: `${projectTitle} - Project | Vin Yap`,
-//   ogUrl: `${siteUrl}/projects/${projectSlug}`,
-//   ogImage: `${siteUrl}/assets/images/projects/${projectSlug}/preview.png`,
-//   twitterTitle: siteTitle,
-//   twitterDescription: `${projectTitle} - Project | Vin Yap`,
-//   twitterUrl: `${siteUrl}/projects/${projectSlug}`,
-//   twitterImage: `${siteUrl}/assets/images/projects/${projectSlug}/preview.png`,
-//   twitterCard: 'summary_large_image',
-//   twitterCreator: '@vin_yap',
-//   twitterSite: '@vin_yap',
-// }
+};
 ---
 <!DOCTYPE html>
 <html lang={lang}>
