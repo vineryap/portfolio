@@ -37,8 +37,8 @@ const skillsSectionContent = data.body.filter(slice => slice.slice_type === 'ski
                             <PrismicText textContent={data.name}/>
                         </h1>
                         <h3 id="subheading" class="w-full text-2xl 2xl:text-4xl text-right font-medium text-primary filter drop-shadow">
-                            <span class="text-base text-neutral">I'm a </span>
-                            <PrismicText textContent={data.subheading}/>
+                            <!-- <span class="text-base text-neutral">I'm a </span> -->
+                            <span class="before:content-['-'] before:mr-1"><PrismicText textContent={data.subheading}/></span>
                         </h3>
                     </div>
                 </div>
