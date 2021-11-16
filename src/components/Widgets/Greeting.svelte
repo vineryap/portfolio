@@ -7,9 +7,6 @@
 
 	lang = lang in greetings_i18n ? lang : 'en';
 
-	let greeting = getGreeting(new Date().getHours()),
-		interval = null;
-
 	function getGreeting(hour) {
 		if ((hour >= 5 && hour < 12) || hour < 12) {
 			return greetings_i18n[lang].morning;
@@ -19,6 +16,10 @@
 			return greetings_i18n[lang].evening;
 		}
 	}
+
+	let greeting = getGreeting(new Date().getHours()),
+		interval = null;
+
 
 	$: hour = date && date.getHours();
 	$: getGreeting(hour);
