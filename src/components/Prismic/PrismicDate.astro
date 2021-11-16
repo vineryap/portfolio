@@ -11,8 +11,7 @@ const {
     }
 } = Astro.props;
 
-const date = asDate(date);
-const formattedDate = new Intl.DateTimeFormat(locales, { options }).format(date);
+const formattedDate = new Intl.DateTimeFormat(locales, options).format(asDate(date));
 ---
 
 {formattedDate}
