@@ -25,7 +25,7 @@
 		if (!date) {
 			date = new Date();
 			const milliseconds = date.getMilliseconds();
-			const delay = milliseconds < 1000 * 60 * 60 ? 1000 * 60 * 60 - milliseconds : 0;
+			const delay = milliseconds === 0 ? 0 : 1000 - milliseconds;
 			setTimeout(() => {
 				interval = setInterval(() => {
 					date = new Date();
