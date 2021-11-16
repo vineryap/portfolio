@@ -17,12 +17,9 @@
 		}
 	}
 
-	let greeting = getGreeting(new Date().getHours()),
-		interval = null;
+	let interval = null;
 
-
-	$: hour = date && date.getHours();
-	$: getGreeting(hour);
+	$: greeting = date ? getGreeting(date.getHours()) : getGreeting(new Date().getHours());
 
 	onMount(() => {
 		if (!date) {
