@@ -50,18 +50,20 @@ const skillsSectionContent = data.body.filter(slice => slice.slice_type === 'ski
                             <Greeting lang={lang} client:load="svelte"/>
                             <PrismicText textContent={data.eyebrow}/>
                         </h5>
-                        <ruby class="mb-4">
-                        {
-                            namePhoneticPairs.map(({name, phonetic}) => (
-                                <>
-                                    <rb class="text-5xl 2xl:text-7xl font-extrabold text-neutral capitalize filter drop-shadow mr-3 last-of-type:mr-0">
-                                        {name}
-                                    </rb>
-                                    <rt class="ja-font text-xs text-secondary-focus font-bold drop-shadow-sm mr-3 last-of-type:mr-0">{phonetic}</rt>
-                                </>
-                            ))
-                        }
-                        </ruby>
+                        <h1 class="mb-4">
+                            <ruby>
+                            {
+                                namePhoneticPairs.map(({name, phonetic}) => (
+                                    <>
+                                        <rb class="text-5xl 2xl:text-7xl font-extrabold text-neutral capitalize filter drop-shadow mr-3 last-of-type:mr-0">
+                                            {name}
+                                        </rb>
+                                        <rt class="ja-font text-xs text-secondary-focus font-bold drop-shadow-sm mr-3 last-of-type:mr-0">{phonetic}</rt>
+                                    </>
+                                ))
+                            }
+                            </ruby>
+                        </h1>
                         <h3 id="subheading" class="ja-font w-full text-2xl 2xl:text-4xl text-right font-medium text-primary filter drop-shadow">
                             <PrismicText textContent={data.subheading}/>
                         </h3>
