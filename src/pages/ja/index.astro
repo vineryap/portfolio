@@ -10,7 +10,7 @@ import PrismicHTML from '../../components/Prismic/PrismicHTML.astro';
 import PrismicText from '../../components/Prismic/PrismicText.astro';
 
 const res = await client.getSingle('homepage', { lang: 'ja-jp' });
-const data = await res.data
+const data = await res.data;
 const currentPage = Astro.request.url.pathname;
 const lang = currentPage && getLanguageFromURL(currentPage);
 
@@ -19,6 +19,19 @@ const MainHeadProps = {
     title: "Vin Yap Portfolio",
     description: "個人のポートフォリオウェブサイト。"
 };
+
+const name = data.name;
+const phonetic = data.name_phonetic;
+const namePhoneticPairs = name.map((obj, i) => {
+    const nameArray = obj.text.split(" ");
+    const phoneticArray = phonetic[i].text.split("　");
+    return nameArray.map((name, index) => {
+            return {
+                name,
+                phonetic: phoneticArray[index]
+            }
+        })
+}).flat();
 
 // Projects Section
 const allProjects = Astro.fetchContent('./project/**/*.md');
@@ -37,14 +50,20 @@ const skillsSectionContent = data.body.filter(slice => slice.slice_type === 'ski
                             <Greeting lang={lang} client:load="svelte"/>
                             <PrismicText textContent={data.eyebrow}/>
                         </h5>
-                        <ruby>
-                            <rb>
-                                <h1 id="heading" class="mb-4 text-5xl 2xl:text-7xl font-extrabold text-neutral capitalize filter drop-shadow">
-                                    <PrismicText textContent={data.name}/>
-                                </h1>
-                            </rb>
-                            <rt class="ja-font text-xs text-secondary-focus font-bold drop-shadow-sm"><PrismicText textContent={data.name_phonetic}/></rt>
-                        </ruby>
+                        <h1 class="mb-4">
+                            <ruby>
+                            {
+                                namePhoneticPairs.map(({name, phonetic}) => (
+                                    <>
+                                        <rb class="text-5xl 2xl:text-7xl font-extrabold text-neutral capitalize filter drop-shadow mr-3 last-of-type:mr-0">
+                                            {name}
+                                        </rb>
+                                        <rt class="ja-font text-xs text-secondary-focus font-bold drop-shadow-sm mr-3 last-of-type:mr-0">{phonetic}</rt>
+                                    </>
+                                ))
+                            }
+                            </ruby>
+                        </h1>
                         <h3 id="subheading" class="ja-font w-full text-2xl 2xl:text-4xl text-right font-medium text-primary filter drop-shadow">
                             <PrismicText textContent={data.subheading}/>
                         </h3>

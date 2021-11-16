@@ -7,27 +7,32 @@
 
 	lang = lang in greetings_i18n ? lang : 'en';
 
-	let greeting,
+	let greeting = getGreeting(new Date().getHours()),
 		interval = null;
 
-	$: hour = date && date.getHours();
-
-	$: {
+	function getGreeting(hour) {
 		if ((hour >= 5 && hour < 12) || hour < 12) {
-			greeting = greetings_i18n[lang].morning;
+			return greetings_i18n[lang].morning;
 		} else if (hour <= 17) {
-			greeting = greetings_i18n[lang].afternoon;
+			return greetings_i18n[lang].afternoon;
 		} else {
-			greeting = greetings_i18n[lang].evening;
+			return greetings_i18n[lang].evening;
 		}
 	}
 
+	$: hour = date && date.getHours();
+	$: getGreeting(hour);
+
 	onMount(() => {
-		greeting = '';
 		if (!date) {
-			interval = setInterval(() => {
-				date = new Date();
-			}, 1000);
+			date = new Date();
+			const milliseconds = date.getMilliseconds();
+			const delay = milliseconds < 1000 * 60 * 60 ? 1000 * 60 * 60 - milliseconds : 0;
+			setTimeout(() => {
+				interval = setInterval(() => {
+					date = new Date();
+				}, 1000 * 60 * 60);
+			}, delay);
 		}
 	});
 
