@@ -1,4 +1,6 @@
 <script>
+	import { data } from 'autoprefixer';
+
 	import { onMount, onDestroy } from 'svelte';
 	import greetings_i18n from './greetingi18n.json';
 
@@ -24,8 +26,9 @@
 	onMount(() => {
 		if (!date) {
 			date = new Date();
-			const milliseconds = date.getMilliseconds();
-			const delay = milliseconds === 0 ? 0 : 1000 - milliseconds;
+			// if minute is not 0 get the difference between in milliseconds.
+			const minutes = date.getMinutes();
+			const delay = minutes === 0 ? 0 : (60 - minutes) * 60 * 1000;
 			setTimeout(() => {
 				interval = setInterval(() => {
 					date = new Date();
