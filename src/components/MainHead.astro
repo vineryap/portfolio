@@ -7,6 +7,7 @@ const locale = {
     en: "en_US",
     ja: "ja_JP"
 }
+const alternateLocale = lang === "en" ? "ja_JP" : "en_US";
 ---
 
 <!-- Common -->
@@ -36,7 +37,7 @@ const locale = {
 
 <!-- OpenGraph -->
 <meta property="og:locale" content={locale[lang]}/>
-<meta property="og:locale:alternate" content={lang}/>
+<meta property="og:locale:alternate" content={alternateLocale}/>
 <meta property="og:site_name" content="Vin Yap Portfolio"/>
 <meta property="og:title" content={title}>
 { description && <meta property="og:description" content={description}> }
@@ -46,7 +47,7 @@ const locale = {
 { image && (<meta property="og:image:type" content="image/png">) }
 { image && (<meta property="og:image:alt" content={title}>) }
 <meta property="og:type" content="website"/>
-<meta property="og:url" content={canonicalURL}/>
+<meta property="og:url" content={Astro.request.url.href}/>
 
 
 <!-- Twitter -->
