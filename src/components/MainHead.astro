@@ -29,11 +29,13 @@ const alternateLocale = lang === "en" ? "ja_JP" : "en_US";
 
 <!-- fonts -->
 { lang === "ja" && (<link rel="preconnect" href="https://fonts.googleapis.com">)}
-{ lang === "ja" && (<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> )}
-{ lang === "ja" && (<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">)}
+{ lang === "ja" && (<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>)}
+{ lang === "ja" && (<link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">)}
+{ lang === "ja" && (<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"></noscript>)}
 
 <!-- stylesheet -->
-<link rel="stylesheet" type="text/css" href={globalCSS}>
+<link rel="preload" href={globalCSS} as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href={globalCSS}></noscript>
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap.xml">
