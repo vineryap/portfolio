@@ -32,15 +32,15 @@ const skillsSectionContent = data.body.filter(slice => slice.slice_type === 'ski
             <section id="header" class=" min-h-[500px] md:min-h-[650px] 2xl:min-h-[750px] flex justify-center items-center mx-auto bg-cover bg-no-repeat" style="background-image: url(/assets/smoothwave.svg);">
                 <div class="px-5 md:px-0 flex flex-col items-center">
                     <div class="flex flex-col items-start mb-16 text-left lg:flex-grow md:mb-0">
-                        <h5 class="mb-4 text-xs xl:text-sm font-semibold tracking-widest text-neutral uppercase ">
+                        <p class="mb-4 text-xs xl:text-sm font-semibold tracking-widest text-neutral uppercase ">
                             <PrismicText textContent={data.eyebrow}/>
-                        </h5>
+                        </p>
                         <h1 id="heading" class="mb-4 text-5xl 2xl:text-7xl font-extrabold text-neutral  capitalize filter drop-shadow">
                             <PrismicText textContent={data.name}/>
                         </h1>
-                        <h3 id="subheading" class="w-full text-2xl 2xl:text-4xl text-right font-medium text-primary filter drop-shadow">
+                        <h2 id="subheading" class="w-full text-2xl 2xl:text-4xl text-right font-medium text-primary filter drop-shadow">
                             <span class="before:content-['-'] before:mr-1"><PrismicText textContent={data.subheading}/></span>
-                        </h3>
+                        </h2>
                     </div>
                 </div>
             </section>

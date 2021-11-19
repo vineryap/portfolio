@@ -21,7 +21,6 @@ const i18n = {
   }
 }
 ---
-
 <article class="w-full transition-all border-2 border-secondary border-opacity-30 hover:border-opacity-100 overflow-hidden rounded-lg">
     <div class="flex flex-col h-full justify-between p-6">
       <!-- <h2 class="tracking-widest text-xs font-medium text-neutral text-opacity-60 mb-1">{project.category}</h2> -->
@@ -40,7 +39,7 @@ const i18n = {
         {
           project.github_url && 
           <span class="inline-flex items-center leading-none py-1">
-            <a href={project.github_url} target="_blank" rel="external" class={`${lang === 'ja' ? 'ja-font' : ''} btn btn-xs btn-outline btn-accent rounded`}>
+            <a href={project.github_url} target="_blank" rel="external noreferrer" class={`${lang === 'ja' ? 'ja-font' : ''} btn btn-xs btn-outline btn-accent rounded`}>
               <span class="hidden">{i18n[lang].sourceCodeLinka11y}</span>
               <Icon uri={"logos:github-icon"} className="mr-2" />
               {i18n[lang].sourceCodeLink}<Icon uri="ei:external-link" className="w-5 h-5 opacity-70"/>
