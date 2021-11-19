@@ -66,5 +66,5 @@ const alternateLocale = lang === "en" ? "ja_JP" : "en_US";
 <meta name="twitter:description" content={description}>
 { image && (<meta name="twitter:image" content={image}>) }
 
-<script type="module" src={Astro.resolve('../scripts/scroll-handler.js')}></script>
+<script type="module" src={Astro.resolve('../scripts/scroll-handler.js')} defer></script>
 <slot/>
