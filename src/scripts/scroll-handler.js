@@ -24,17 +24,7 @@ function scroll(selectors) {
       if (el) {
         let top = el.offsetTop;
         if (e.target.hash) {
-          if (selectors.includes('menu-drawer')) {
-            top =
-              e.target.hash === '#about'
-                ? document.querySelector(e.target.hash).offsetTop / 1.1
-                : document.querySelector(e.target.hash).offsetTop;
-          } else {
-            top =
-              e.target.hash === '#about'
-                ? document.querySelector(e.target.hash).offsetTop / 1.1
-                : document.querySelector(e.target.hash).offsetTop;
-          }
+          document.querySelector(e.target.hash).offsetTop;
         }
 
         window.scrollTo({ top, left: el.offsetLeft, behavior: 'smooth' });
@@ -52,10 +42,7 @@ function highlightLink() {
 
     sections.forEach((section) => {
       let sectionTop = section.offsetTop;
-
-      if (section.id === 'about' || section.id === 'skills') {
-        sectionTop = section.offsetTop / 1.5;
-      }
+      
       if (scrollY >= sectionTop) {
         current = `#${section.getAttribute('id')}`;
       }
