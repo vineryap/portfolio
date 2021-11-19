@@ -29,8 +29,8 @@ const alt = altText ? altText : `${name} icon.`;
 {
     tooltip ?
     <span data-tip={dataTip ?? name} class="tooltip">
-        <img src={URL} data-icon={dataIconKey} id={name} class={className ?? "w-8 h-8"} alt={alt}/>
+        <img src={URL} width="32px" height="32px" data-icon={dataIconKey} id={name} class={className ?? "w-8 h-8"} alt={alt}/>
     </span>
     :
-    <img src={URL} data-icon={dataIconKey} id={name} class={className ?? "w-8 h-8"} alt={alt}/>
+    <img src={URL} width="32px" height="32px" data-icon={dataIconKey} id={name} class={className ?? "w-8 h-8"} alt={alt}/>
 }
