@@ -100,8 +100,6 @@
 						on:load={handleImageLoad}
 						transition:fade
 						id="background"
-						width="1920px"
-						height="1080px"
 						class="w-full h-full absolute inset-0 object-cover object-center rounded-3xl"
 						sizes="(min-width: 2560px) 2560px"
 						srcset={image.srcset}
