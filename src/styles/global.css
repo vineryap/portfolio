@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
 body {
   @apply break-words text-neutral font-sans antialiased bg-base-100;
 }
@@ -23,4 +22,5 @@ body {
 }
 .ja-font {
   font-family: 'Noto Sans JP', sans-serif;
+  font-display: optional;
 }
