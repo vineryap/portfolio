@@ -20,6 +20,11 @@ const i18n = {
     viewButtonText: "開く"
   }
 }
+const { href } = Astro.request.url
+const projectLink = {
+  href: project.external_url ? project.external_url === '#' ? href : project.external_url : project.url,
+  rel: project.external_url ? project.external_url === '#' ? '' : 'external noreferrer' : ''
+}
 ---
 <article class="w-full transition-all border-2 border-secondary border-opacity-30 hover:border-opacity-100 overflow-hidden rounded-lg">
     <div class="flex flex-col h-full justify-between p-6">
@@ -46,8 +51,7 @@ const i18n = {
             </a>
           </span>
         }
-
-          <a href={project.external_url ?? project.url} rel={project.external_url && "external noreferrer"} target="_blank" class={`${lang === 'ja' ? 'ja-font' : ''} btn btn-xs btn-outline btn-secondary rounded`}>
+          <a href={projectLink.href} rel={projectLink.rel} target="_blank" class={`${lang === 'ja' ? 'ja-font' : ''} btn btn-xs btn-outline btn-secondary rounded`}>
           {i18n[lang].viewButtonText}
           </a>
         </div>
