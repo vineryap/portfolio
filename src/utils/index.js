@@ -45,5 +45,18 @@ const toggleClasses = (element, ...classes) => {
   }
 };
 
+/**
+ * Check if string is a website url.
+ * @param {string} str
+ * @returns {boolean} true if string is a website url
+ */
+const isUrl = (str) => {
+  try {
+    return !!new URL(str);
+  } catch (error) {
+    return false;
+  }
+};
+
 export * from './browsers';
-export { toSlug, getImageDimension, getCurrentfilePath, toggleClasses };
+export { toSlug, getImageDimension, getCurrentfilePath, toggleClasses, isUrl };
