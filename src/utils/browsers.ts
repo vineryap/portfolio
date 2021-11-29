@@ -4,7 +4,7 @@
  * @param {string} keyword keyword to search
  * @returns {boolean} true if keyword is found in user agent
  */
-function agentHas(keyword) {
+function agentHas(keyword): boolean {
   return navigator.userAgent.toLowerCase().search(keyword.toLowerCase()) > -1;
 }
 
@@ -12,7 +12,7 @@ function agentHas(keyword) {
  * Check if browser is IE.
  * @returns {boolean} True if browser is IE
  */
-function isIE() {
+function isIE(): boolean {
   return 'documentMode' in document;
 }
 
@@ -20,7 +20,7 @@ function isIE() {
  * Check if browser is Safari.
  * @returns {boolean} True if browser is Safari
  */
-function isSafari() {
+function isSafari(): boolean {
   return (
     (!!window.ApplePaySetupFeature || 'safari' in window) &&
     agentHas('Safari') &&
@@ -33,7 +33,7 @@ function isSafari() {
  * Check if browser is Chrome.
  * @returns {boolean} True if browser is Chrome
  */
-function isChrome() {
+function isChrome(): boolean {
   return agentHas('CriOS') || agentHas('Chrome') || 'chrome' in window;
 }
 
@@ -41,7 +41,7 @@ function isChrome() {
  * Check if browser is Firefox.
  * @returns {boolean} True if browser is Firefox
  */
-function isFirefox() {
+function isFirefox(): boolean {
   return agentHas('Firefox') || agentHas('FxiOS') || agentHas('Focus');
 }
 
@@ -49,7 +49,7 @@ function isFirefox() {
  * Check if browser is Edge.
  * @returns {boolean} True if browser is Edge
  */
-function isEdge() {
+function isEdge(): boolean {
   return agentHas('Edg');
 }
 
@@ -57,7 +57,7 @@ function isEdge() {
  * Check if browser is Opera.
  * @returns {boolean} True if browser is Opera
  */
-function isOpera() {
+function isOpera(): boolean {
   return agentHas('OPR');
 }
 
@@ -65,7 +65,7 @@ function isOpera() {
  * Check if browser is Vivaldi.
  * @returns {boolean} True if browser is Vivaldi
  */
-function isVivaldi() {
+function isVivaldi(): boolean {
   return agentHas('Vivaldi');
 }
 
@@ -73,7 +73,7 @@ function isVivaldi() {
  * Check if browser is Brave.
  * @returns {boolean} True if browser is Brave
  */
-const isBrave = () => {
+const isBrave = (): boolean => {
   return 'brave' in navigator;
 };
 
@@ -81,7 +81,7 @@ const isBrave = () => {
  * Check if browser is mobile.
  * @returns {boolean} True if browser is mobile
  */
-const isMobile = () => {
+const isMobile = (): boolean => {
   return (
     agentHas('Mobi') ||
     agentHas('Android') ||
@@ -97,7 +97,7 @@ const isMobile = () => {
  * check if browser is console.
  * @returns {boolean} True if browser is console
  */
-const isConsole = () => {
+const isConsole = (): boolean => {
   return (
     agentHas('Console') ||
     agentHas('Nintendo') ||
@@ -111,7 +111,7 @@ const isConsole = () => {
  * Get safari browser version from client browser.
  * @returns {(string|null)} Version of safari browser or null if user agent is undefined.
  */
-const getSafariVersion = () => {
+const getSafariVersion = (): string | null => {
   return isSafari() && navigator.userAgent.match(/version\/(\d+[.]?\d+)/i)[1];
 };
 
