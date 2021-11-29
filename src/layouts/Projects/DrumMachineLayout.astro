@@ -24,7 +24,7 @@ const i18n = {
 <ProjectLayout lang={lang} projectInfo={i18n[lang].SEO}>
   <div id="drum-machine" class="flex w-full h-full justify-center px-5 mt-20 mb-60 lg:px-0">
       <div class="container max-w-3xl">
-        <DrumMachine client:visible="svelte" />
+        <DrumMachine client:only="svelte" />
       </div>
   </div>
 </ProjectLayout>
