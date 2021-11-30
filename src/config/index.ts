@@ -58,6 +58,6 @@ const SOCIAL_MEDIA_LINKS = {
   freeCodeCamp: 'https://freecodecamp.org/vineryap'
 };
 
-const EMAIL = 'vineryap@gmail.com';
+const EMAIL = 'vineryap@vinyap.com';
 
 export { SITE, OPEN_GRAPH, KNOWN_LANGUAGES, NAVIGATION, SOCIAL_MEDIA_LINKS, EMAIL };
