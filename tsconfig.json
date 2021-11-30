@@ -1,8 +1,7 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node",
-        "target": "es6",
-        "module": "es2015",
-    },
-    "extends": "@tsconfig/svelte/tsconfig.json"
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es6",
+    "module": "es2015"
+  }
 }

@@ -2,6 +2,7 @@
 import ProjectCard from './ProjectCard.astro';
 import ShowButton from './ProjectsButton.svelte'
 import { SOCIAL_MEDIA_LINKS } from '../../config/index';
+import { isUrl } from '../../utils/index';
 
 const { sectionTitle, allProjects, lang = "en" } = Astro.props;
 
@@ -19,7 +20,7 @@ const projectSize = 4;
 
 sortedProjects.forEach((project, i) => {
     // create source code url
-    if (project.github_url) project.github_url = SOCIAL_MEDIA_LINKS.github + '/portfolio/tree/master/src/components/Projects/' + project.github_url;
+    if (project.github_url && !isUrl(project.github_url)) project.github_url = SOCIAL_MEDIA_LINKS.github + '/portfolio/tree/master/src/components/Projects/' + project.github_url;
 
     // paginate projects
     const storeProject = () => {
@@ -53,7 +54,7 @@ sortedProjects.forEach((project, i) => {
         ))}
         </div>
         <div class="w-full justify-center text-center text-base font-medium tracking-wider">
-            { paginatedProjects.length > 1 && <ShowButton lang={lang} client:visible="svelte" /> }
+            { paginatedProjects.length > 1 && <ShowButton lang={lang} client:only="svelte" /> }
         </div>
     </div>
 </section>

@@ -41,14 +41,8 @@ const i18n = {
 
     <div class="h-full mt-20 mb-40">
         <div class="h-full px-5 mx-auto">
-            <Clock client:visible="react" />
+            <Clock client:only="react" />
             <audio id="beep" class="hidden invisible" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
-
-            <div class="flex flex-col lg:flex-row w-full">
-                <div id="md-content" class="w-full mx-auto mt-12 text-lg leading-snug tracking-tight lg:px-0">
-                    { content.astro.source && <Markdown content={content.astro.source} /> }
-                </div>
-            </div>
         </div>
     </div>
 </ProjectLayout>

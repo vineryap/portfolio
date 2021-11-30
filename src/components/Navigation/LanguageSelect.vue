@@ -21,7 +21,7 @@
     <select
       class="language-select"
       :class="className"
-      :value="lang"
+      :value="pageLang"
       @change="onChangeHandler"
     >
       <option
@@ -29,21 +29,56 @@
         :value="options.value"
         :key="options.value"
       >
-        <span :class="lang === 'ja' ? 'ja-font font-semibold' : ''">{{
-          options.label
-        }}</span>
+        <span :class="pageLang === 'ja' ? 'ja-font font-semibold' : ''">
+          {{ options.label }}
+        </span>
       </option>
     </select>
   </div>
 </template>
 
 <script lang="ts">
+import { ref, computed } from 'vue'
 import './LanguageSelect.css'
 import { KNOWN_LANGUAGES, langPathRegex } from '../../utils/languages'
 
+const i18n = {
+  english: {
+    en: {
+      label: 'English',
+      value: 'en'
+    },
+    ja: {
+      label: '英語',
+      value: 'en'
+    }
+  },
+  japanese: {
+    en: {
+      label: 'Japanese',
+      value: 'ja'
+    },
+    ja: {
+      label: '日本語',
+      value: 'ja'
+    }
+  }
+}
+
+interface LanguageSelectOption {
+  label: string
+  value: string
+}
+
+let browserLang = navigator.language.split('-')[0]
+browserLang =
+  browserLang && Object.values(KNOWN_LANGUAGES).includes(browserLang)
+    ? browserLang
+    : 'en'
+
 export default {
   props: {
-    lang: {
+    pageLang: {
       type: String,
       default: 'en',
       required: true
@@ -54,37 +89,18 @@ export default {
     }
   },
   setup(props) {
-    const { lang, className } = props
-    const i18n = {
-      english: {
-        en: {
-          label: 'English',
-          value: 'en'
-        },
-        ja: {
-          label: '英語',
-          value: 'en'
-        }
-      },
-      japanese: {
-        en: {
-          label: 'Japanese',
-          value: 'ja'
-        },
-        ja: {
-          label: '日本語',
-          value: 'ja'
-        }
-      }
-    }
-    const selectOptions = Object.keys(KNOWN_LANGUAGES).map(key => {
+    const { pageLang, className } = props
+
+    const selectOptions: LanguageSelectOption[] = Object.keys(
+      KNOWN_LANGUAGES
+    ).map(key => {
       return {
-        value: i18n[key.toLowerCase()][lang].value,
-        label: i18n[key.toLowerCase()][lang].label
+        value: i18n[key.toLowerCase()][browserLang].value,
+        label: i18n[key.toLowerCase()][browserLang].label
       }
     })
 
-    const onChangeHandler = e => {
+    const onChangeHandler = (e): string => {
       const newLang = e.target.value
       let actualDest = window.location.pathname.replace(langPathRegex, '/')
 
@@ -103,7 +119,7 @@ export default {
     }
 
     return {
-      lang,
+      pageLang,
       className,
       onChangeHandler,
       selectOptions
