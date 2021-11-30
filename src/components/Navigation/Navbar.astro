@@ -54,7 +54,7 @@ const links = NAVIGATION[lang];
       <div class="flex flex-wrap items-center justify-end text-base ml-auto md:min-w-[10rem] lg:min-w-[20rem]">
         <MenuDrawer lang={lang} links={links} {projectTitle} />
         <div class="hidden md:inline-flex items-center list-none space-x-4">
-          <LanguageSelect lang={lang} client:only="vue"/>
+          <LanguageSelect pageLang={lang} client:only="vue"/>
         </div>
       </div>
 
